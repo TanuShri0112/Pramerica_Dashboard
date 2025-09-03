@@ -26,6 +26,50 @@ const Section3Video = () => {
     return map[key] || map['en'];
   }, [selectedLang]);
 
+  // Language aware narration for the PDF section
+  const getPdfNarrationText = (langCode) => {
+    const base = (langCode || 'en-US').split('-')[0];
+    const texts = {
+      en: (
+        'Pramerica Rakshak Smart - One Page Overview\n' +
+        'Overview\n' +
+        'Pramerica Rakshak Smart is a life insurance savings plan designed to provide protection, ' +
+        'guaranteed income, and long-term financial security for individuals and families.\n' +
+        'Key Benefits\n' +
+        '✔ Life Insurance cover during the policy term\n' +
+        '✔ Guaranteed Income payouts\n' +
+        '✔ Savings Booster at maturity\n' +
+        '✔ Tax Savings under prevailing laws\n' +
+        'Flexibility\n' +
+        '• Policy terms: 10, 12, 15, or 20 years\n' +
+        '• Premium payment terms: 5, 7, 10, or 12 years\n' +
+        '• Payment modes: Annual, Semi-Annual, or Monthly\n' +
+        'Assurance\n' +
+        'As long as premiums are paid, benefits are guaranteed. No surprises – full clarity and ' +
+        'financial strength for your loved ones.'
+      ),
+      hi: (
+        'प्रमेरिका रक्षक स्मार्ट - एक पेज अवलोकन\n' +
+        'अवलोकन\n' +
+        'प्रमेरिका रक्षक स्मार्ट एक जीवन बीमा बचत योजना है, जो सुरक्षा,\n' +
+        'गारंटीड आय और व्यक्तियों व परिवारों के लिए दीर्घकालिक वित्तीय स्थिरता प्रदान करने हेतु बनाई गई है।\n' +
+        'मुख्य लाभ\n' +
+        '✔ पॉलिसी अवधि के दौरान जीवन बीमा कवर\n' +
+        '✔ गारंटीड आय के भुगतान\n' +
+        '✔ परिपक्वता पर सेविंग्स बूस्टर\n' +
+        '✔ प्रचलित कानूनों के अंतर्गत कर लाभ\n' +
+        'लचीलापन\n' +
+        '• पॉलिसी अवधि: 10, 12, 15 या 20 वर्ष\n' +
+        '• प्रीमियम भुगतान अवधि: 5, 7, 10 या 12 वर्ष\n' +
+        '• भुगतान मोड: वार्षिक, अर्द्ध-वार्षिक या मासिक\n' +
+        'आश्वासन\n' +
+        'जब तक प्रीमियम का भुगतान किया जाता है, लाभ सुनिश्चित हैं। कोई आश्चर्य नहीं – पूर्ण स्पष्टता और\n' +
+        'आपके प्रियजनों के लिए वित्तीय मजबूती।'
+      )
+    };
+    return texts[base] || texts.en;
+  };
+
   // Load voices when component mounts
   useEffect(() => {
     const synth = window.speechSynthesis;
@@ -74,7 +118,7 @@ const Section3Video = () => {
 
   const handleDownloadPDF = () => {
     const link = document.createElement('a');
-    link.href = '/assets/Section4.pdf';
+    link.href = '/assets/Section.pdf';
     link.download = 'PramericaRakshakSmart.pdf';
     document.body.appendChild(link);
     link.click();
@@ -82,7 +126,7 @@ const Section3Video = () => {
   };
 
   const handleFullscreenPDF = () => {
-    window.open('/assets/Section4.pdf', '_blank');
+    window.open('/assets/Section.pdf', '_blank');
   };
 
   return (
@@ -203,6 +247,14 @@ const Section3Video = () => {
               <span className="text-sm font-medium text-gray-700">Document Controls:</span>
             </div>
             <div className="flex items-center gap-3">
+              <Button 
+                onClick={() => handleSpeakToggle('pdf-section', getPdfNarrationText(selectedLang))}
+                variant="outline"
+                className="bg-purple-50 border-purple-200 text-purple-700 hover:bg-purple-100"
+              >
+                {speakingBlocks['pdf-section'] ? <Pause className="h-4 w-4 mr-2" /> : <Play className="h-4 w-4 mr-2" />}
+                {speakingBlocks['pdf-section'] ? uiText.stop : uiText.listen}
+              </Button>
               <Button
                 onClick={handleDownloadPDF}
                 variant="outline"
@@ -225,7 +277,7 @@ const Section3Video = () => {
           {/* PDF Viewer */}
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
             <iframe
-              src="/assets/Section4.pdf"
+              src="/assets/Section.pdf"
               className="w-full h-[500px] md:h-[600px] lg:h-[700px] border-0"
               title="Policy Details PDF"
               frameBorder="0"
@@ -233,7 +285,7 @@ const Section3Video = () => {
               <p className="p-4 text-gray-600">
                 Your browser does not support PDF viewing. 
                 <a 
-                  href="/assets/Section4.pdf" 
+                  href="/assets/Section.pdf" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:text-blue-800 underline ml-2"
