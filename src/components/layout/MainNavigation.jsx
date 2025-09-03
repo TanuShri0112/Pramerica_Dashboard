@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Home, Book, Users, Folder, FileText, BarChart2,
-  Grid, Settings, FileBox, MessageCircle, HelpCircle, Gamepad2
+  Grid, Settings, FileBox, MessageCircle, HelpCircle, Gamepad2, Bot
 } from 'lucide-react';
 import { NavItem } from './NavItem';
 import { useSidebar } from '@/contexts/SidebarContext';
@@ -65,6 +65,11 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
   const handlePreliminaryProfileClick = () => {
     // Open Preliminary Profile in a new tab
     window.open('https://prudential-ai.vercel.app/', '_blank');
+    if (onItemClick) onItemClick();
+  };
+
+  const handleChatbotClick = () => {
+    navigate('/chatbot');
     if (onItemClick) onItemClick();
   };
 
@@ -187,6 +192,19 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
             to="#"
             active={false}
             onClick={handlePreliminaryProfileClick}
+            collapsed={isMainCollapsed}
+            className="hover-lift"
+          />
+        </motion.div>
+
+        {/* Chatbot */}
+        <motion.div variants={itemVariants}>
+          <NavItem 
+            icon={Bot}
+            label="Chatbot"
+            to="/chatbot"
+            active={pathname.startsWith('/chatbot')}
+            onClick={handleChatbotClick}
             collapsed={isMainCollapsed}
             className="hover-lift"
           />

@@ -82,6 +82,7 @@ import EditModulePage from './pages/EditModulePage';
 import LessonMod1Dreams from './pages/LessonMod1Dreams';
 import LessonMod2 from './pages/LessonMod2';
 import LessonMod3Protection from './pages/LessonMod3Protection';
+import Chatbot from './pages/Chatbot.jsx';
 
 const queryClient = new QueryClient();
 
@@ -149,6 +150,7 @@ const App = () => (
                   <Route path="messages" element={<Messages />} />
                   <Route path="help" element={<Help />} />
                   <Route path="profile" element={<Profile />} />
+                  <Route path="chatbot" element={<Chatbot />} />
                   
                   {/* New Instructor Dashboard Routes */}
                   <Route path="tasks" element={<TaskManagement />} />
