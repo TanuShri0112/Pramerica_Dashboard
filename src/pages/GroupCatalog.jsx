@@ -30,41 +30,41 @@ const GroupCatalog = () => {
   const mockGroups = [
     {
       id: 1,
-      name: 'JavaScript Developers',
+      name: 'Group-3',
       type: 'Study Group',
       members: 45,
       image: '/placeholder.svg',
-      description: 'A group for JavaScript enthusiasts to share knowledge and projects.',
+      description: 'Group description',
       privacy: 'Public',
       category: 'Technology'
     },
     {
       id: 2,
-      name: 'Project Phoenix Team',
+      name: 'Group-4',
       type: 'Project Team',
       members: 12,
       image: '/placeholder.svg',
-      description: 'The core team for Project Phoenix.',
+      description: 'Group description',
       privacy: 'Private',
       category: 'Business'
     },
     {
       id: 3,
-      name: 'Weekend Hikers',
+      name: 'Group-5',
       type: 'Social Club',
       members: 78,
       image: '/placeholder.svg',
-      description: 'A social group for planning weekend hiking trips.',
+      description: 'Group description',
       privacy: 'Public',
       category: 'Social'
     },
     {
       id: 4,
-      name: 'React Study Buddies',
+      name: 'Group-6',
       type: 'Study Group',
       members: 23,
       image: '/placeholder.svg',
-      description: 'Learning and mastering React together.',
+      description: 'Group description',
       privacy: 'Public',
       category: 'Technology'
     },

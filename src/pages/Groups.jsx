@@ -74,7 +74,7 @@ const GroupsContent = () => {
       name: groupData.name,
       members: 0,
       type: 'Study group', // Default type
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&auto=format' // Default image
+      image: 'https://cdn.sanity.io/images/kts928pd/production/3087f904950d07c3216f5164cb1196052b547c63-731x731.png' // Default image
     };
     addGroup(newGroup);
   };

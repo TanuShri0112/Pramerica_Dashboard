@@ -15,8 +15,8 @@ const GroupManage = () => {
 
   // Mock group data - in a real app, you would fetch this based on the ID
   const [formData, setFormData] = useState({
-    name: "Credit Analysis A",
-    description: "Group focused on credit analysis fundamentals and practical applications.",
+    name: "Group-7",
+    description: "Group description",
     capacity: "30",
     isActive: true
   });

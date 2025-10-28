@@ -8,21 +8,21 @@ const teachingCourses = [
   {
     id: 1,
     title: "Banking Basics",
-    image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1200&h=800&fit=crop&auto=format",
+    image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
     students: 120,
     modules: 6
   },
   {
     id: 2,
     title: "Protecting Dreams: A Learning Journey with Rakshak Smart",
-    image: "/assets/Course2.PNG",
+    image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
     students: 95,
     modules: 5
   },
   {
     id: 3,
     title: "Introduction to Financial Markets",
-    image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=1200&h=800&fit=crop&auto=format",
+    image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
     students: 110,
     modules: 7
   }

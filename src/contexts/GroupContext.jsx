@@ -31,17 +31,17 @@ export function GroupProvider({ children }) {
   const [groups, setGroups] = useState([
     { 
       id: 2, 
-      name: 'Customer Service Excellence', 
+      name: 'Group-1', 
       members: 313, 
       type: 'Study group', 
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&auto=format'
+      image: 'https://cdn.sanity.io/images/kts928pd/production/3087f904950d07c3216f5164cb1196052b547c63-731x731.png'
     },
     { 
       id: 5, 
-      name: 'IT Management & Strategy', 
+      name: 'Group-2', 
       members: 156, 
       type: 'Interest group', 
-      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop&auto=format'
+      image: 'https://cdn.sanity.io/images/kts928pd/production/3087f904950d07c3216f5164cb1196052b547c63-731x731.png'
     },
   ]);
 

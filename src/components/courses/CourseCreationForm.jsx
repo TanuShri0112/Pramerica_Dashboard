@@ -39,8 +39,8 @@ const CourseCreationForm = () => {
   
   const form = useForm({
     defaultValues: {
-      title: "",
-      description: "",
+      title: "Course-1",
+      description: "Course description",
       level: "Beginner",
       duration: "",
       maxStudents: "",

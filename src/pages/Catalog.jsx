@@ -28,44 +28,44 @@ const Catalog = () => {
   const [catalogs, setCatalogs] = useState([
     {
       id: 1,
-      name: 'Insurance Fundamentals',
+      name: 'Catalog 1',
       description: 'Core insurance concepts, policies, and industry knowledge',
-      imageUrl: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&h=300&fit=crop&auto=format',
+      imageUrl: 'https://www.shutterstock.com/image-vector/outline-catalogue-vector-icon-isolated-600nw-1376928077.jpg',
       courseCount: 2 // Banking Basics, Introduction to Financial Markets
     },
     {
       id: 2,
-      name: 'Life Insurance Sales',
+      name: 'Catalog 2',
       description: 'Life insurance products, sales techniques, and customer engagement',
-      imageUrl: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400&h=300&fit=crop&auto=format',
+      imageUrl: 'https://www.shutterstock.com/image-vector/outline-catalogue-vector-icon-isolated-600nw-1376928077.jpg',
       courseCount: 1 // Protecting Dreams: A Learning Journey with Rakshak Smart
     },
     {
       id: 3,
-      name: 'Sales Training',
+      name: 'Catalog 3',
       description: 'Advanced sales methodologies and customer relationship management',
-      imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&auto=format',
+      imageUrl: 'https://www.shutterstock.com/image-vector/outline-catalogue-vector-icon-isolated-600nw-1376928077.jpg',
       courseCount: 1 // Sales techniques and methodologies
     },
     {
       id: 4,
-      name: 'Insurance Compliance',
+      name: 'Catalog 4',
       description: 'Regulatory requirements, legal frameworks, and compliance practices',
-      imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=300&fit=crop&auto=format',
+      imageUrl: 'https://www.shutterstock.com/image-vector/outline-catalogue-vector-icon-isolated-600nw-1376928077.jpg',
       courseCount: 1 // Compliance and regulatory training
     },
     {
       id: 5,
-      name: 'Financial Planning',
+      name: 'Catalog 5',
       description: 'Personal financial planning and wealth management strategies',
-      imageUrl: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop&auto=format',
+      imageUrl: 'https://www.shutterstock.com/image-vector/outline-catalogue-vector-icon-isolated-600nw-1376928077.jpg',
       courseCount: 1 // Financial planning fundamentals
     },
     {
       id: 6,
-      name: 'Customer Service',
+      name: 'Catalog 6',
       description: 'Insurance customer service excellence and client satisfaction',
-      imageUrl: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=300&fit=crop&auto=format',
+      imageUrl: 'https://www.shutterstock.com/image-vector/outline-catalogue-vector-icon-isolated-600nw-1376928077.jpg',
       courseCount: 1 // Customer service training
     }
   ]);

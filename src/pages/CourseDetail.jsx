@@ -20,11 +20,11 @@ import { useSidebar } from '@/contexts/SidebarContext';
 
 // Dictionary of course titles keyed by ID
 const courseTitles = {
-  '1757539': 'Advanced Credit Analysis',
-  'nodejs101': 'Node.js Fundamentals',
-  'reactjs202': 'React.js Advanced',
-  'ml506': 'Machine Learning',
-  'data345': 'Data Analysis'
+  '1757539': 'Course-1',
+  'nodejs101': 'Course-2',
+  'reactjs202': 'Course-3',
+  'ml506': 'Course-4',
+  'data345': 'Course-5'
 };
 
 const CourseDetail = () => {

@@ -12,8 +12,8 @@ import { toast } from 'sonner';
 
 const CourseEditDialog = ({ open, onOpenChange, courseId, courseTitle }) => {
   const [formData, setFormData] = useState({
-    title: courseTitle,
-    description: "Learn the fundamentals of business trust structures and their applications in modern commerce.",
+    title: courseTitle || 'Course-1',
+    description: "Course description",
     category: "Business",
     instructor: "Sarah Johnson",
     duration: "8 weeks",
