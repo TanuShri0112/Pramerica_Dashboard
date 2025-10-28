@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Home, Book, Users, Folder, FileText, BarChart2,
-  Grid, Settings, FileBox, MessageCircle, HelpCircle, Gamepad2, Bot
+  Grid, Settings, FileBox, MessageCircle, HelpCircle, Bot
 } from 'lucide-react';
 import { NavItem } from './NavItem';
 import { useSidebar } from '@/contexts/SidebarContext';
@@ -50,12 +50,6 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
     if (onItemClick) onItemClick();
   };
 
-  const handleGamesClick = () => {
-    // Open the games URL in a new tab
-    window.open('https://game-open-scene.vercel.app/', '_blank');
-    if (onItemClick) onItemClick();
-  };
-
   const handleScenarioAssessmentClick = () => {
     // Open Scenario Assessment in a new tab
     window.open('https://preview--rakshak-coach-62.lovable.app/', '_blank');
@@ -64,7 +58,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
 
   const handlePreliminaryProfileClick = () => {
     // Open Preliminary Profile in a new tab
-    window.open('https://prudential-ai.vercel.app/', '_blank');
+    window.open('https://bapco.netlify.app/', '_blank');
     if (onItemClick) onItemClick();
   };
 
@@ -153,19 +147,6 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
             to="/catalog"
             active={pathname.startsWith('/catalog')}
             onClick={() => handleNavItemClick('/catalog')}
-            collapsed={isMainCollapsed}
-            className="hover-lift"
-          />
-        </motion.div>
-        
-        {/* Games */}
-        <motion.div variants={itemVariants}>
-          <NavItem 
-            icon={Gamepad2}
-            label="Games"
-            to="#"
-            active={false}
-            onClick={handleGamesClick}
             collapsed={isMainCollapsed}
             className="hover-lift"
           />

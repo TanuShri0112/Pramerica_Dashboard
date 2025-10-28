@@ -31,9 +31,9 @@ const Section3Video = () => {
     const base = (langCode || 'en-US').split('-')[0];
     const texts = {
       en: (
-        'Pramerica Rakshak Smart - One Page Overview\n' +
+        'BAPCO Rakshak Smart - One Page Overview\n' +
         'Overview\n' +
-        'Pramerica Rakshak Smart is a life insurance savings plan designed to provide protection, ' +
+        'BAPCO Rakshak Smart is a life insurance savings plan designed to provide protection, ' +
         'guaranteed income, and long-term financial security for individuals and families.\n' +
         'Key Benefits\n' +
         '✔ Life Insurance cover during the policy term\n' +
@@ -119,7 +119,7 @@ const Section3Video = () => {
   const handleDownloadPDF = () => {
     const link = document.createElement('a');
     link.href = '/assets/Section.pdf';
-    link.download = 'PramericaRakshakSmart.pdf';
+    link.download = 'BAPCORakshakSmart.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

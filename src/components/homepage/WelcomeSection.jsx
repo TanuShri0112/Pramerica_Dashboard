@@ -14,7 +14,7 @@ export function WelcomeSection() {
   const slides = [
     {
       key: "welcome",
-      title: "Welcome to Pramerica!",
+      title: "Welcome to BAPCO!",
       subtitle: "We're glad to see you here.",
       body: "Check out the next slides for some useful tips on how to get started with your insurance and sales training journey.",
       onClick: () => {},

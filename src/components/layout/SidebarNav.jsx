@@ -79,7 +79,10 @@ export const SidebarNav = ({ onCloseMobile }) => {
                 <BookOpen className="w-5 h-5 text-white" />
               </div>
               <div className="text-white">
-                <h1 className="text-lg font-semibold">PRAMERICA</h1>
+                <div>
+                  <h1 className="text-lg font-semibold">BAPCO</h1>
+                  <p className="text-sm">Athena LMS</p>
+                </div>
               </div>
             </div>
           )}

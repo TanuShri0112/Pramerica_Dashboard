@@ -38,7 +38,7 @@ const AdminSettings = () => {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="platformName">Platform Name</Label>
-                <Input id="platformName" defaultValue="PRAMERICA" />
+                <Input id="platformName" defaultValue="BAPCO" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="supportEmail">Support Email</Label>
