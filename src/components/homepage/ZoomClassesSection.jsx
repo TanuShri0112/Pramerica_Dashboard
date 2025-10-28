@@ -15,7 +15,7 @@ const ZoomClassesSection = () => {
   const [classes, setClasses] = useState([
     {
       id: 1,
-      title: "Advanced Insurance Sales - Module 3",
+      title: "Module 3",
       date: "Wed, Jun 12",
       time: "10:00 AM",
       duration: "1 hour",
@@ -28,7 +28,7 @@ const ZoomClassesSection = () => {
     },
     {
       id: 2,
-      title: "Life Insurance Sales Workshop",
+      title: "Module 2",
       date: "Sat, Jun 15",
       time: "2:00 PM",
       duration: "2 hours",

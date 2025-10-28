@@ -7,21 +7,21 @@ import { Book, Calendar, Users, Copy } from "lucide-react";
 const teachingCourses = [
   {
     id: 1,
-    title: "Banking Basics",
+    title: "Course 1",
     image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
     students: 120,
     modules: 6
   },
   {
     id: 2,
-    title: "Protecting Dreams: A Learning Journey with Rakshak Smart",
+    title: "Course 2",
     image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
     students: 95,
     modules: 5
   },
   {
     id: 3,
-    title: "Introduction to Financial Markets",
+    title: "Course 3",
     image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
     students: 110,
     modules: 7
