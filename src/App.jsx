@@ -83,6 +83,10 @@ import LessonMod1Dreams from './pages/LessonMod1Dreams';
 import LessonMod2 from './pages/LessonMod2';
 import LessonMod3Protection from './pages/LessonMod3Protection';
 import Chatbot from './pages/Chatbot.jsx';
+import TrainingProgramManagement from './pages/TrainingProgramManagement.jsx';
+import AccommodationManagement from './pages/AccommodationManagement.jsx';
+import TenderManagement from './pages/TenderManagement.jsx';
+import CertificateManagement from './pages/CertificateManagement.jsx';
 
 const queryClient = new QueryClient();
 
@@ -156,6 +160,12 @@ const App = () => (
                   <Route path="tasks" element={<TaskManagement />} />
                   <Route path="announcements" element={<AnnouncementManagement />} />
                   <Route path="calendar" element={<CalendarManagement />} />
+                  
+                  {/* LMS Dashboard Feature Routes */}
+                  <Route path="training-programs" element={<TrainingProgramManagement />} />
+                  <Route path="accommodation" element={<AccommodationManagement />} />
+                  <Route path="tenders" element={<TenderManagement />} />
+                  <Route path="certificates" element={<CertificateManagement />} />
                   
                   {/* Assessment Routes */}
                   <Route path="assessment/multiple-choice" element={<MultipleChoiceQuiz />} />

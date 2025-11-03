@@ -71,7 +71,7 @@ export const AdminLayout = ({ title = 'Dashboard' }) => {
       }
     }
 
-    document.title = `${newTitle} | BAPCO`;
+    document.title = `${newTitle} | Department of Education`;
   }, [location.pathname, title, courseId, setCourseTitle]);
 
   return (

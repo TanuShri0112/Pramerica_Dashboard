@@ -31,14 +31,14 @@ const Section3Video = () => {
     const base = (langCode || 'en-US').split('-')[0];
     const texts = {
       en: (
-        'BAPCO Rakshak Smart - One Page Overview\n' +
+        'Department of Education Training Program - Overview\n' +
         'Overview\n' +
-        'BAPCO Rakshak Smart is a life insurance savings plan designed to provide protection, ' +
+        'The Department of Education training program is designed to provide professional development, ' +
         'guaranteed income, and long-term financial security for individuals and families.\n' +
         'Key Benefits\n' +
-        '✔ Life Insurance cover during the policy term\n' +
-        '✔ Guaranteed Income payouts\n' +
-        '✔ Savings Booster at maturity\n' +
+        '✔ Professional Development opportunities\n' +
+        '✔ Continuous Learning Programs\n' +
+        '✔ Career Advancement Support\n' +
         '✔ Tax Savings under prevailing laws\n' +
         'Flexibility\n' +
         '• Policy terms: 10, 12, 15, or 20 years\n' +
@@ -119,7 +119,7 @@ const Section3Video = () => {
   const handleDownloadPDF = () => {
     const link = document.createElement('a');
     link.href = '/assets/Section.pdf';
-    link.download = 'BAPCORakshakSmart.pdf';
+    link.download = 'DepEdTrainingMaterials.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -171,7 +171,7 @@ const Section3Video = () => {
             size="sm" 
             variant="outline" 
             className="bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100" 
-            onClick={() => handleSpeakToggle('main-content', 'Guaranteed Benefits, Zero Surprises. With Rakshak Smart, your family\'s future is always secure.')}
+            onClick={() => handleSpeakToggle('main-content', 'Comprehensive Training Programs, Professional Excellence. With Department of Education, your professional development is always supported.')}
           >
             {speakingBlocks['main-content'] ? <Pause className="h-4 w-4 mr-2" /> : <Play className="h-4 w-4 mr-2" />}
             {speakingBlocks['main-content'] ? uiText.stop : uiText.listen}
@@ -200,12 +200,12 @@ const Section3Video = () => {
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 py-8">
           {/* Main Heading */}
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 animate-fade-in">
-            Guaranteed Benefits, Zero Surprises
+            Comprehensive Training, Professional Excellence
           </h2>
           
           {/* Sub-heading */}
           <p className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-8 max-w-3xl leading-relaxed animate-fade-in animation-delay-200">
-            With Rakshak Smart, your family's future is always secure.
+            With Department of Education, your professional development is always supported.
           </p>
           
           {/* Call-to-Action Button */}

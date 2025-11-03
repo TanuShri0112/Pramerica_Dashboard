@@ -38,11 +38,11 @@ const AdminSettings = () => {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="platformName">Platform Name</Label>
-                <Input id="platformName" defaultValue="BAPCO" />
+                <Input id="platformName" defaultValue="Department of Education" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="supportEmail">Support Email</Label>
-                <Input id="supportEmail" type="email" defaultValue="support@creditoracademy.com" />
+                <Input id="supportEmail" type="email" defaultValue="support@deped.gov.ph" />
               </div>
               <div className="flex items-center space-x-2">
                 <Switch id="maintenanceMode" />

@@ -63,6 +63,44 @@ const initialCategoryReports = {
       library: 'Built-in',
     },
   ],
+  attendance: [
+    {
+      id: 'attendance-1',
+      title: 'Attendance Analytics by Training Batch',
+      image: '/lovable-uploads/a7f0fcd0-363d-47fe-9b05-2b59cc82bea8.png',
+      date: 'Wed Jan 24, 2024',
+      description: 'Attendance percentage analytics broken down by training batch.',
+      library: 'Built-in',
+    },
+    {
+      id: 'attendance-2',
+      title: 'Participant List Export (Excel + PDF)',
+      image: '/lovable-uploads/a7f0fcd0-363d-47fe-9b05-2b59cc82bea8.png',
+      date: 'Wed Jan 24, 2024',
+      description: 'Export participant lists in Excel and PDF formats.',
+      library: 'Built-in',
+    },
+  ],
+  venue: [
+    {
+      id: 'venue-1',
+      title: 'Venue Utilization Analytics',
+      image: '/lovable-uploads/9583fabd-1d7a-4162-b184-ca09ea10d280.png',
+      date: 'Wed Jan 24, 2024',
+      description: 'Analytics on venue utilization and logistics summary.',
+      library: 'Built-in',
+    },
+  ],
+  accommodation: [
+    {
+      id: 'accommodation-1',
+      title: 'Accommodation & Meals Summary Report',
+      image: '/lovable-uploads/3457f0a5-e623-4454-ad61-76766d94d02e.png',
+      date: 'Wed Jan 24, 2024',
+      description: 'Summary reports for accommodation and meals (for BAC audits).',
+      library: 'Built-in',
+    },
+  ],
   courses: [
     {
       id: 'course-1',
@@ -177,6 +215,9 @@ const Reports = () => {
   const reportCategories = [
     { id: 'assessments', title: 'Assessments', image: '/lovable-uploads/a7f0fcd0-363d-47fe-9b05-2b59cc82bea8.png', count: categoryReports.assessments.length },
     { id: 'certificates', title: 'Certificates', image: '/lovable-uploads/d2ec9d1c-262f-43d8-b29e-5098dc49bf32.png', count: categoryReports.certificates.length },
+    { id: 'attendance', title: 'Attendance Analytics', image: '/lovable-uploads/a7f0fcd0-363d-47fe-9b05-2b59cc82bea8.png', count: categoryReports.attendance?.length || 0 },
+    { id: 'venue', title: 'Venue Utilization', image: '/lovable-uploads/9583fabd-1d7a-4162-b184-ca09ea10d280.png', count: categoryReports.venue?.length || 0 },
+    { id: 'accommodation', title: 'Accommodation & Meals', image: '/lovable-uploads/3457f0a5-e623-4454-ad61-76766d94d02e.png', count: categoryReports.accommodation?.length || 0 },
     { id: 'compliance', title: 'Compliance courses', image: '/lovable-uploads/3457f0a5-e623-4454-ad61-76766d94d02e.png', count: categoryReports.compliance.length },
     { id: 'courses', title: 'Courses', image: '/lovable-uploads/9583fabd-1d7a-4162-b184-ca09ea10d280.png', count: categoryReports.courses.length },
     { id: 'groups', title: 'Groups', image: '/lovable-uploads/bf4e7c38-d052-456d-8727-1a69d00eadd3.png', count: categoryReports.groups.length },

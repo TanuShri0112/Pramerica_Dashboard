@@ -3,9 +3,11 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
-import { FileText, Upload, Plus, List, Grid, Search } from 'lucide-react';
+import { FileText, Upload, Plus, List, Grid, Search, Filter } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox'; // Note: Checkbox is imported but not used in this component.
+import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { ResourceListView } from '@/components/resources/ResourceListView';
@@ -147,13 +149,96 @@ const initialResourcesData = [
 const Resources = () => {
   const [activeTab, setActiveTab] = useState('catalog');
   const [searchQuery, setSearchQuery] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
   const [selectedResource, setSelectedResource] = useState(null);
   const [showResourceDialog, setShowResourceDialog] = useState(false);
   const [showAddResourceDialog, setShowAddResourceDialog] = useState(false);
   const [showDetailDialog, setShowDetailDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [viewMode, setViewMode] = useState('grid');
-  const [resourcesData, setResourcesData] = useState(initialResourcesData);
+  const [resourcesData, setResourcesData] = useState([
+    ...initialResourcesData,
+    {
+      id: '4',
+      title: 'Tender Document - DepEd 2024-001',
+      image: '/placeholder.svg',
+      date: '02/15/2024',
+      author: 'Procurement Team',
+      type: 'pdf',
+      category: 'Tender',
+      content: {
+        metadata: {
+          creator: 'Procurement Team',
+          created: 'Feb 15, 2024',
+          tags: ['tender', 'procurement', 'deped']
+        }
+      }
+    },
+    {
+      id: '5',
+      title: 'Training Attendance Sheet - Batch 1',
+      image: '/placeholder.svg',
+      date: '02/16/2024',
+      author: 'Training Admin',
+      type: 'pdf',
+      category: 'Evidence',
+      content: {
+        metadata: {
+          creator: 'Training Admin',
+          created: 'Feb 16, 2024',
+          tags: ['attendance', 'evidence', 'training']
+        }
+      }
+    },
+    {
+      id: '6',
+      title: 'Budget Utilization Report Q1 2024',
+      image: '/placeholder.svg',
+      date: '03/01/2024',
+      author: 'Finance Team',
+      type: 'file',
+      category: 'Finance',
+      content: {
+        metadata: {
+          creator: 'Finance Team',
+          created: 'Mar 1, 2024',
+          tags: ['budget', 'finance', 'report']
+        }
+      }
+    },
+    {
+      id: '7',
+      title: 'Reimbursement Documents - February',
+      image: '/placeholder.svg',
+      date: '02/28/2024',
+      author: 'Finance Team',
+      type: 'pdf',
+      category: 'Finance',
+      content: {
+        metadata: {
+          creator: 'Finance Team',
+          created: 'Feb 28, 2024',
+          tags: ['reimbursement', 'finance']
+        }
+      }
+    },
+    {
+      id: '8',
+      title: 'Administrative Policy Update',
+      image: '/placeholder.svg',
+      date: '02/20/2024',
+      author: 'Admin',
+      type: 'document',
+      category: 'Admin',
+      content: {
+        metadata: {
+          creator: 'Admin',
+          created: 'Feb 20, 2024',
+          tags: ['admin', 'policy']
+        }
+      }
+    }
+  ]);
   const [filters, setFilters] = useState({
     organization: true,
     business: true,
@@ -161,6 +246,8 @@ const Resources = () => {
     favorites: true,
     personal: true
   });
+
+  const documentCategories = ['all', 'Tender', 'Evidence', 'Finance', 'Admin', 'General'];
 
   /** @param {ResourceType} resource */
   const handleResourceClick = (resource) => {
@@ -221,10 +308,12 @@ const Resources = () => {
     return <FileText className="h-5 w-5 text-blue-500" />;
   };
 
-  // Filter resources based on search query
-  const filteredResources = resourcesData.filter(
-    resource => resource.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Filter resources based on search query and category
+  const filteredResources = resourcesData.filter(resource => {
+    const matchesSearch = resource.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = categoryFilter === 'all' || resource.category === categoryFilter || (!resource.category && categoryFilter === 'General');
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div className="p-6 animate-fade-in max-w-7xl mx-auto">
@@ -233,9 +322,9 @@ const Resources = () => {
         description="Manage and access all your learning resources" 
       />
 
-      {/* Search Bar */}
-      <div className="mb-6">
-        <div className="relative max-w-md">
+      {/* Search Bar and Filters */}
+      <div className="mb-6 flex flex-col sm:flex-row gap-4">
+        <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             type="text"
@@ -244,6 +333,21 @@ const Resources = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+        </div>
+        <div className="flex items-center gap-2">
+          <Filter className="h-4 w-4 text-gray-400" />
+          <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+            <SelectTrigger className="w-48">
+              <SelectValue placeholder="Filter by Category" />
+            </SelectTrigger>
+            <SelectContent>
+              {documentCategories.map(category => (
+                <SelectItem key={category} value={category}>
+                  {category === 'all' ? 'All Categories' : category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
@@ -316,7 +420,14 @@ const Resources = () => {
                       </button>
                     </div>
                     <div className="p-4">
-                      <h3 className="font-medium text-sm mb-2 truncate">{resource.title}</h3>
+                      <div className="flex items-start justify-between mb-2">
+                        <h3 className="font-medium text-sm truncate flex-1">{resource.title}</h3>
+                        {resource.category && (
+                          <Badge variant="outline" className="ml-2 text-xs">
+                            {resource.category}
+                          </Badge>
+                        )}
+                      </div>
                       <div className="flex justify-between text-xs text-gray-500">
                         <span>{resource.date}</span>
                         <span>{resource.author}</span>

@@ -19,7 +19,7 @@ const ZoomClassesSection = () => {
       date: "Wed, Jun 12",
       time: "10:00 AM",
       duration: "1 hour",
-      description: "Deep dive into insurance sales methodologies and customer engagement",
+      description: "Deep dive into educational methodologies and student engagement",
       zoomLink: "https://zoom.us/j/123456789",
       meetingId: "123 456 789",
       attendance: 0,

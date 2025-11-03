@@ -25,15 +25,15 @@ const Settings = () => {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="siteName">Platform Name</Label>
-              <Input id="siteName" defaultValue="BAPCO" />
+              <Input id="siteName" defaultValue="Department of Education" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="siteUrl">Platform URL</Label>
-              <Input id="siteUrl" defaultValue="https://creditoracademy.com" />
+              <Input id="siteUrl" defaultValue="https://www.deped.gov.ph" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="supportEmail">Support Email</Label>
-              <Input id="supportEmail" type="email" defaultValue="support@creditoracademy.com" />
+              <Input id="supportEmail" type="email" defaultValue="support@deped.gov.ph" />
             </div>
             <Button>Save Changes</Button>
           </CardContent>
@@ -46,11 +46,11 @@ const Settings = () => {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="fromEmail">From Email</Label>
-              <Input id="fromEmail" type="email" defaultValue="no-reply@creditoracademy.com" />
+              <Input id="fromEmail" type="email" defaultValue="no-reply@deped.gov.ph" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="emailFooter">Email Footer Text</Label>
-              <Input id="emailFooter" defaultValue="© 2025 BAPCO. All rights reserved." />
+              <Input id="emailFooter" defaultValue="© 2025 Department of Education. All rights reserved." />
             </div>
             <Button>Update Email Settings</Button>
           </CardContent>

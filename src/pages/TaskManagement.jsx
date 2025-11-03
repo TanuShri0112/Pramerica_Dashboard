@@ -16,17 +16,17 @@ const TaskManagement = () => {
   const [tasks, setTasks] = useState([
     {
       id: 1,
-      title: 'Review Insurance Sales Materials',
-      description: 'Review and update insurance sales training materials for new agents',
+      title: 'Review Teaching Materials',
+      description: 'Review and update teaching training materials for new teachers',
       deadline: 'Today',
       priority: 'high',
       status: 'pending',
-      category: 'Sales Training'
+      category: 'Teacher Training'
     },
     {
       id: 2,
-      title: 'Grade Sales Technique Assessments',
-      description: 'Evaluate recent sales technique assessments and provide feedback',
+      title: 'Grade Teaching Methodology Assessments',
+      description: 'Evaluate recent teaching methodology assessments and provide feedback',
       deadline: 'Tomorrow',
       priority: 'medium',
       status: 'in-progress',
@@ -43,8 +43,8 @@ const TaskManagement = () => {
     },
     {
       id: 4,
-      title: 'Update Sales Training Syllabus',
-      description: 'Make necessary updates to insurance sales training syllabus',
+      title: 'Update Teacher Training Syllabus',
+      description: 'Make necessary updates to teacher training syllabus',
       deadline: 'In 2 weeks',
       priority: 'medium',
       status: 'pending',
@@ -52,8 +52,8 @@ const TaskManagement = () => {
     },
     {
       id: 5,
-      title: 'Schedule Sales Coaching Sessions',
-      description: 'Set up coaching schedule for sales agents',
+      title: 'Schedule Teaching Coaching Sessions',
+      description: 'Set up coaching schedule for teachers',
       deadline: 'Next month',
       priority: 'low',
       status: 'completed',

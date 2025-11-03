@@ -22,7 +22,18 @@ const AnnouncementManagement = () => {
 
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [editingAnnouncement, setEditingAnnouncement] = useState(null);
-  const [newAnnouncement, setNewAnnouncement] = useState({ title: '', content: '', priority: 'medium', audience: 'All Students', type: 'general' });
+  const [newAnnouncement, setNewAnnouncement] = useState({ 
+    title: '', 
+    content: '', 
+    priority: 'medium', 
+    audience: 'All Students', 
+    type: 'general',
+    contactPerson: {
+      name: '',
+      email: '',
+      phone: ''
+    }
+  });
 
   const audiences = ['All Students', 'React Students', 'Node.js Students', 'ML Students', 'Specific Course'];
   const priorities = ['high', 'medium', 'low'];
@@ -35,7 +46,14 @@ const AnnouncementManagement = () => {
     }
     const nextId = announcements.length ? Math.max(...announcements.map(a => a.id)) + 1 : 1;
     setAnnouncements([{ id: nextId, source: 'Instructor', time: 'Just now', ...newAnnouncement }, ...announcements]);
-    setNewAnnouncement({ title: '', content: '', priority: 'medium', audience: 'All Students', type: 'general' });
+    setNewAnnouncement({ 
+      title: '', 
+      content: '', 
+      priority: 'medium', 
+      audience: 'All Students', 
+      type: 'general',
+      contactPerson: { name: '', email: '', phone: '' }
+    });
     setIsAddDialogOpen(false);
     toast.success('Announcement posted successfully');
   };
@@ -100,6 +118,34 @@ const AnnouncementManagement = () => {
                 <SelectTrigger><SelectValue placeholder="Audience" /></SelectTrigger>
                 <SelectContent>{audiences.map(a => (<SelectItem key={a} value={a}>{a}</SelectItem>))}</SelectContent>
               </Select>
+              <div className="border-t pt-4 space-y-3">
+                <h3 className="font-semibold text-sm">Contact Person (Optional)</h3>
+                <Input 
+                  placeholder="Contact Name" 
+                  value={newAnnouncement.contactPerson.name} 
+                  onChange={e => setNewAnnouncement({ 
+                    ...newAnnouncement, 
+                    contactPerson: { ...newAnnouncement.contactPerson, name: e.target.value }
+                  })} 
+                />
+                <Input 
+                  type="email"
+                  placeholder="Contact Email" 
+                  value={newAnnouncement.contactPerson.email} 
+                  onChange={e => setNewAnnouncement({ 
+                    ...newAnnouncement, 
+                    contactPerson: { ...newAnnouncement.contactPerson, email: e.target.value }
+                  })} 
+                />
+                <Input 
+                  placeholder="Contact Phone" 
+                  value={newAnnouncement.contactPerson.phone} 
+                  onChange={e => setNewAnnouncement({ 
+                    ...newAnnouncement, 
+                    contactPerson: { ...newAnnouncement.contactPerson, phone: e.target.value }
+                  })} 
+                />
+              </div>
               <div className="flex gap-2">
                 <Button onClick={addAnnouncement} className="flex-1">Post Announcement</Button>
                 <Button variant="outline" onClick={() => setIsAddDialogOpen(false)} className="flex-1">Cancel</Button>
@@ -123,6 +169,14 @@ const AnnouncementManagement = () => {
                       <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {a.time}</span>
                     </div>
                     <p className="text-gray-700 mb-3">{a.content}</p>
+                    {a.contactPerson && (a.contactPerson.name || a.contactPerson.email) && (
+                      <div className="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                        <p className="text-xs font-semibold text-blue-900 mb-1">Contact Person:</p>
+                        <p className="text-sm text-blue-800">{a.contactPerson.name}</p>
+                        {a.contactPerson.email && <p className="text-xs text-blue-700">{a.contactPerson.email}</p>}
+                        {a.contactPerson.phone && <p className="text-xs text-blue-700">{a.contactPerson.phone}</p>}
+                      </div>
+                    )}
                     <div className="flex items-center gap-2">
                       <Badge className={`text-xs ${getPriorityColor(a.priority)}`}>{a.priority} priority</Badge>
                       <Badge className={`text-xs ${getTypeColor(a.type)}`}>{a.type}</Badge>

@@ -9,10 +9,12 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { Plus, Calendar as CalendarIcon, Search, Filter, Download, Users, Clock, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { Plus, Calendar as CalendarIcon, Search, Filter, Download, Users, Clock, CheckCircle, XCircle, AlertCircle, Camera, FileDown } from 'lucide-react';
 import { format, isAfter, endOfDay } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { SessionDetailsDialog } from './SessionDetailsDialog';
+import QRCodeScanner from './QRCodeScanner';
+import { toast } from 'sonner';
 
 const CourseAttendance = () => {
   const [activeTab, setActiveTab] = useState('details');
@@ -28,6 +30,7 @@ const CourseAttendance = () => {
   });
   const [sessionDetailsOpen, setSessionDetailsOpen] = useState(false);
   const [selectedSession, setSelectedSession] = useState(null);
+  const [isQRScannerOpen, setIsQRScannerOpen] = useState(false);
 
   // Mock data for students
   const students = [
@@ -265,6 +268,49 @@ const CourseAttendance = () => {
     setSessionDetailsOpen(true);
   };
 
+  const handleQRScan = (studentId, status) => {
+    const dateKey = format(selectedDate, 'yyyy-MM-dd');
+    const existingAttendance = dailyAttendanceByDate[dateKey] || [];
+    const updatedAttendance = existingAttendance.filter(a => a.studentId !== studentId);
+    updatedAttendance.push({
+      studentId,
+      status,
+      time: format(new Date(), 'hh:mm a'),
+      notes: 'Scanned via QR code'
+    });
+    setDailyAttendanceByDate({
+      ...dailyAttendanceByDate,
+      [dateKey]: updatedAttendance
+    });
+    toast.success('Attendance recorded via QR scan');
+  };
+
+  const exportToExcel = () => {
+    const headers = ['Student Name', 'Email', 'Present', 'Absent', 'Late', 'Attendance %'];
+    const rows = students.map(student => [
+      student.name,
+      student.email,
+      student.attendance.present,
+      student.attendance.absent,
+      student.attendance.late,
+      `${student.attendance.percentage}%`
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `attendance-export-${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    link.click();
+    window.URL.revokeObjectURL(url);
+    toast.success('Attendance data exported to CSV');
+  };
+
   const handleDateChange = (date) => {
     if (date) setSelectedDate(date);
   };
@@ -277,9 +323,17 @@ const CourseAttendance = () => {
           <p className="text-gray-600">Track and manage student attendance</p>
         </div>
         <div className="flex gap-2">
+          <Button variant="outline" onClick={() => setIsQRScannerOpen(true)} disabled={isFuture}>
+            <Camera className="h-4 w-4 mr-2" />
+            QR Scan
+          </Button>
+          <Button variant="outline" onClick={exportToExcel}>
+            <FileDown className="h-4 w-4 mr-2" />
+            Export Excel
+          </Button>
           <Button variant="outline" onClick={exportToCSV} disabled={isFuture}>
             <Download className="h-4 w-4 mr-2" />
-            Export
+            Export CSV
           </Button>
         </div>
       </div>
@@ -594,6 +648,14 @@ const CourseAttendance = () => {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {/* QR Code Scanner */}
+      <QRCodeScanner
+        open={isQRScannerOpen}
+        onOpenChange={setIsQRScannerOpen}
+        onScan={handleQRScan}
+        students={students}
+      />
 
       {/* Edit Attendance Modal */}
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>

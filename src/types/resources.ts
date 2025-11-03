@@ -6,6 +6,7 @@ export type ResourceType = {
   date: string;
   author: string;
   type: 'document' | 'file' | 'pdf' | 'certificate' | 'badge' | 'template' | 'question-bank' | 'rubric' | 'scorm';
+  category?: 'Tender' | 'Evidence' | 'Finance' | 'Admin' | 'General';
   content?: {
     skills?: {
       category: string;
