@@ -71,7 +71,7 @@ export const AdminLayout = ({ title = 'Dashboard' }) => {
       }
     }
 
-    document.title = `${newTitle} | BAPCO`;
+    document.title = `${newTitle} | United Nations Children’s Fund (UNICEF)`;
   }, [location.pathname, title, courseId, setCourseTitle]);
 
   return (

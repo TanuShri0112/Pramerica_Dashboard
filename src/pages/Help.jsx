@@ -4,6 +4,7 @@ import { FAQsSection } from '@/components/help/FAQsSection';
 import { ContactSupportSection } from '@/components/help/ContactSupportSection';
 import { UserGuidesSection } from '@/components/help/UserGuidesSection';
 import { SupportTicketSection } from '@/components/help/SupportTicketSection';
+import HelpSystemStatus from '@/pages/HelpSystemStatus';
 
 const Help = () => {
   const [searchParams] = useSearchParams();
@@ -26,6 +27,8 @@ const Help = () => {
         return <UserGuidesSection />;
       case 'ticket':
         return <SupportTicketSection />;
+      case 'status':
+        return <HelpSystemStatus />;
       default:
         return <FAQsSection />;
     }

@@ -80,8 +80,8 @@ export const SidebarNav = ({ onCloseMobile }) => {
               </div>
               <div className="text-white">
                 <div>
-                  <h1 className="text-lg font-semibold">BAPCO</h1>
-                  <p className="text-sm">Athena LMS</p>
+                  <h1 className="text-lg font-semibold">United Nations Children’s Fund (UNICEF)</h1>
+                  <p className="text-sm">UNICEF</p>
                 </div>
               </div>
             </div>

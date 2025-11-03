@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { I18nProvider } from "@/contexts/I18nContext";
 import { AdminLayout } from "./components/layout/AdminLayout";
 import { SidebarProvider } from "./contexts/SidebarContext";
 import { UserFilterProvider } from "./contexts/UserFilterContext";
@@ -31,6 +32,9 @@ import Courses from "./pages/Courses.jsx";
 import Groups from "./pages/Groups.jsx";
 import Users from "./pages/Users";
 import Reports from "./pages/Reports.jsx";
+import Mentor from "./pages/Mentor.jsx";
+import Mentee from "./pages/Mentee.jsx";
+import Manager from "./pages/Manager.jsx";
 import Resources from "./pages/Resources.jsx";
 import Messages from "./pages/Messages.jsx";
 import Help from "./pages/Help.jsx";
@@ -91,6 +95,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <I18nProvider>
       <BrowserRouter>
         <SidebarProvider>
           <UserFilterProvider>
@@ -151,6 +156,10 @@ const App = () => (
                   <Route path="help" element={<Help />} />
                   <Route path="profile" element={<Profile />} />
                   <Route path="chatbot" element={<Chatbot />} />
+                  {/* Mentorship placeholder routes */}
+                  <Route path="mentor" element={<Mentor />} />
+                  <Route path="mentee" element={<Mentee />} />
+                  <Route path="manager" element={<Manager />} />
                   
                   {/* New Instructor Dashboard Routes */}
                   <Route path="tasks" element={<TaskManagement />} />
@@ -179,6 +188,7 @@ const App = () => (
           </UserFilterProvider>
         </SidebarProvider>
       </BrowserRouter>
+      </I18nProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

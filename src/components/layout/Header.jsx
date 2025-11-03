@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ThemeToggle } from "../theme/ThemeToggle";
+import { LanguageToggle } from "../theme/LanguageToggle";
+import { SyncStatus } from "../shared/SyncStatus";
 import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
@@ -71,7 +73,7 @@ export const Header = ({ onMenuClick }) => {
   const handleAthenaLMSClick = () => {
     navigate('/');
     toast({
-      title: "Welcome to Athena LMS",
+      title: "Welcome to United Nations Children’s Fund (UNICEF)",
       description: "You're now on the homepage",
       duration: 2000,
     });
@@ -118,7 +120,7 @@ export const Header = ({ onMenuClick }) => {
             className="text-lg font-semibold cursor-pointer hover:text-slate-600 transition-colors text-slate-800"
             onClick={handleAthenaLMSClick}
           >
-            Athena LMS
+            United Nations Children’s Fund (UNICEF)
           </h1>
         </div>
         
@@ -168,7 +170,9 @@ export const Header = ({ onMenuClick }) => {
           </div>
           
           <ThemeToggle />
+          <LanguageToggle />
           
+          <div className="hidden md:flex items-center mx-2"><SyncStatus /></div>
           <Button 
             variant="ghost" 
             size="icon" 
