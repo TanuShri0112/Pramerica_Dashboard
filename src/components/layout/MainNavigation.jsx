@@ -1,7 +1,8 @@
 import React from 'react';
 import { 
   Home, Book, Users, Folder, FileText, BarChart2,
-  Grid, Settings, FileBox, MessageCircle, HelpCircle, Bot
+  Grid, Settings, FileBox, MessageCircle, HelpCircle, Bot,
+  Calendar, Bed, Clock, Award
 } from 'lucide-react';
 import { NavItem } from './NavItem';
 import { useSidebar } from '@/contexts/SidebarContext';
@@ -50,17 +51,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
     if (onItemClick) onItemClick();
   };
 
-  const handleScenarioAssessmentClick = () => {
-    // Open Scenario Assessment in a new tab
-    window.open('https://preview--rakshak-coach-62.lovable.app/', '_blank');
-    if (onItemClick) onItemClick();
-  };
-
-  const handlePreliminaryProfileClick = () => {
-    // Open Preliminary Profile in a new tab
-    window.open('https://www.deped.gov.ph/', '_blank');
-    if (onItemClick) onItemClick();
-  };
+  // Removed external links: Scenario Assessment and Preliminary Profile
 
   const handleChatbotClick = () => {
     navigate('/chatbot');
@@ -151,32 +142,60 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
             className="hover-lift"
           />
         </motion.div>
-        
-        {/* Scenario Assessment */}
+
+        {/* Training Programs */}
         <motion.div variants={itemVariants}>
           <NavItem 
-            icon={FileText}
-            label="Scenario Assessment"
-            to="#"
-            active={false}
-            onClick={handleScenarioAssessmentClick}
+            icon={Calendar}
+            label="Training Programs"
+            to="/training-programs"
+            active={pathname.startsWith('/training-programs')}
+            onClick={() => handleNavItemClick('/training-programs')}
+            collapsed={isMainCollapsed}
+            className="hover-lift"
+          />
+        </motion.div>
+
+        {/* Accommodation & Meals */}
+        <motion.div variants={itemVariants}>
+          <NavItem 
+            icon={Bed}
+            label="Accommodation & Meals"
+            to="/accommodation"
+            active={pathname.startsWith('/accommodation')}
+            onClick={() => handleNavItemClick('/accommodation')}
+            collapsed={isMainCollapsed}
+            className="hover-lift"
+          />
+        </motion.div>
+
+        {/* Tender Management */}
+        <motion.div variants={itemVariants}>
+          <NavItem 
+            icon={Clock}
+            label="Tender Management"
+            to="/tenders"
+            active={pathname.startsWith('/tenders')}
+            onClick={() => handleNavItemClick('/tenders')}
+            collapsed={isMainCollapsed}
+            className="hover-lift"
+          />
+        </motion.div>
+
+        {/* Certificates */}
+        <motion.div variants={itemVariants}>
+          <NavItem 
+            icon={Award}
+            label="Certificates"
+            to="/certificates"
+            active={pathname.startsWith('/certificates')}
+            onClick={() => handleNavItemClick('/certificates')}
             collapsed={isMainCollapsed}
             className="hover-lift"
           />
         </motion.div>
         
-        {/* Preliminary Profile */}
-        <motion.div variants={itemVariants}>
-          <NavItem 
-            icon={FileText}
-            label="Preliminary Profile"
-            to="#"
-            active={false}
-            onClick={handlePreliminaryProfileClick}
-            collapsed={isMainCollapsed}
-            className="hover-lift"
-          />
-        </motion.div>
+        {/* Removed: Scenario Assessment and Preliminary Profile */}
 
         {/* Chatbot */}
         <motion.div variants={itemVariants}>
