@@ -179,17 +179,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
         </motion.div>
 
         {/* Chatbot */}
-        <motion.div variants={itemVariants}>
-          <NavItem 
-            icon={Bot}
-            label="Chatbot"
-            to="/chatbot"
-            active={pathname.startsWith('/chatbot')}
-            onClick={handleChatbotClick}
-            collapsed={isMainCollapsed}
-            className="hover-lift"
-          />
-        </motion.div>
+       
         
         {/* Messages */}
         <motion.div variants={itemVariants}>
