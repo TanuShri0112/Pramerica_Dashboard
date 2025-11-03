@@ -11,24 +11,24 @@ export function AnnouncementSection() {
   const announcements = [
     {
       id: 1,
-      title: 'New Insurance Sales Module',
-      source: 'Training Manager',
+      title: 'Training Venue & Schedule Confirmation',
+      source: 'Training Coordinator',
       time: '2 hours ago',
-      content: 'Advanced Life Insurance Sales Techniques module has been added to the Insurance Fundamentals course.',
+      content: 'K-12 Curriculum training for School Leaders starts next Monday. Venue details and meal schedules have been finalized. Check your email for complete information.',
     },
     {
       id: 2,
-      title: 'Sales Training Office Hours',
-      source: 'Sales Coach',
+      title: 'Accommodation & Catering Services',
+      source: 'Logistics Team',
       time: '1 day ago',
-      content: 'Office hours will be held Tuesday and Thursday from 2-4 PM for sales technique consultation.',
+      content: 'All meals (breakfast, lunch, dinner) and snacks will be provided during the training. Accommodation arrangements have been confirmed for out-of-town participants.',
     },
     {
       id: 3,
-      title: 'Insurance License Exam Prep',
+      title: 'Grade 2, 3, 5 & 8 Curriculum Materials',
       source: 'Training Manager',
       time: '3 days ago',
-      content: 'Life Insurance License preparation course final assessment is due next Friday.',
+      content: 'Revised K to 12 Curriculum Phase 2 Implementation materials are now available for download. Please review materials before the training session.',
     },
   ];
 

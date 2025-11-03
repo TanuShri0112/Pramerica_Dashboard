@@ -11,21 +11,21 @@ export function CalendarSection() {
   const events = [
     {
       id: 1,
-      title: 'Insurance Sales Training',
+      title: 'K-12 Curriculum Training - Grade 2 & 3',
       time: '10:00 AM - 12:00 PM',
       date: 'Today',
       type: 'lecture',
     },
     {
       id: 2,
-      title: 'Sales Technique Review',
-      time: '2:00 PM - 3:00 PM',
+      title: 'Lunch & Catering Services',
+      time: '12:00 PM - 1:00 PM',
       date: 'Today',
       type: 'meeting',
     },
     {
       id: 3,
-      title: 'Insurance License Prep',
+      title: 'Grade 5 & 8 Implementation Workshop',
       time: '2:00 PM - 4:00 PM',
       date: 'Today',
       type: 'office-hours',

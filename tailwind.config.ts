@@ -64,7 +64,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					muted: 'hsl(var(--sidebar-muted))',
 				},
-				// Custom colors for BAPCO
+				// Custom colors for DepED Apayao
 				ca: {
 					primary: '#33C3F0',   // Update to match the blue buttons in the screenshots
 					secondary: '#1EAEDB',

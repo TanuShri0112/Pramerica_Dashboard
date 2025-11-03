@@ -7,24 +7,24 @@ import { Book, Calendar, Users, Copy } from "lucide-react";
 const teachingCourses = [
   {
     id: 1,
-    title: "Course 1",
+    title: "K-12 Curriculum: Grades 2 & 3",
     image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
-    students: 120,
-    modules: 6
+    students: 45,
+    modules: 8
   },
   {
     id: 2,
-    title: "Course 2",
+    title: "K-12 Curriculum: Grade 5",
     image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
-    students: 95,
-    modules: 5
+    students: 38,
+    modules: 7
   },
   {
     id: 3,
-    title: "Course 3",
+    title: "K-12 Curriculum: Grade 8",
     image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
-    students: 110,
-    modules: 7
+    students: 42,
+    modules: 9
   }
 ];
 
@@ -39,9 +39,9 @@ export default function TeachingCoursesSection() {
     <section>
       <Card className="overflow-hidden border-blue-100 shadow-md hover:shadow-lg transition-all duration-300">
         <CardHeader className="bg-gradient-to-r from-blue-50 to-white flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-lg flex items-center gap-2 text-blue-800">My Courses</CardTitle>
+          <CardTitle className="text-lg flex items-center gap-2 text-blue-800">Training Modules</CardTitle>
           <Badge variant="default" className="bg-blue-500 text-white rounded-full px-3 py-1 text-sm shadow-sm hover:bg-blue-600 transition-colors">
-            Teaching&nbsp;{teachingCourses.length}
+            Active&nbsp;{teachingCourses.length}
           </Badge>
         </CardHeader>
         <CardContent className="p-4">

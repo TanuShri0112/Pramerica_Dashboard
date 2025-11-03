@@ -10,28 +10,28 @@ export function TaskListSection() {
   const [tasks, setTasks] = useState([
     {
       id: 1,
-      title: 'Complete Insurance Sales Assignment',
+      title: 'Review K-12 Curriculum Materials for Grade 2 & 3',
       dueDate: '2023-07-10',
       completed: false,
       priority: 'high'
     },
     {
       id: 2,
-      title: 'Review Life Insurance Documentation',
+      title: 'Complete Pre-Training Assessment',
       dueDate: '2023-07-12',
       completed: false,
       priority: 'medium'
     },
     {
       id: 3,
-      title: 'Submit Sales Proposal',
+      title: 'Confirm Training Attendance & Accommodation',
       dueDate: '2023-07-15',
       completed: true,
       priority: 'high'
     },
     {
       id: 4,
-      title: 'Watch Lecture on Sales Techniques',
+      title: 'Download Grade 5 & 8 Implementation Guides',
       dueDate: '2023-07-08',
       completed: false,
       priority: 'low'

@@ -15,52 +15,52 @@ const ZoomClassesSection = () => {
   const [classes, setClasses] = useState([
     {
       id: 1,
-      title: "Module 3",
+      title: "Grade 2 & 3 Curriculum Training",
       date: "Wed, Jun 12",
       time: "10:00 AM",
       duration: "1 hour",
-      description: "Deep dive into insurance sales methodologies and customer engagement",
+      description: "Comprehensive training on K-12 curriculum implementation for Grades 2 & 3",
       zoomLink: "https://zoom.us/j/123456789",
       meetingId: "123 456 789",
       attendance: 0,
-      totalStudents: 25,
+      totalStudents: 45,
       isCompleted: false
     },
     {
       id: 2,
-      title: "Module 2",
+      title: "Grade 5 Teaching Methods Workshop",
       date: "Sat, Jun 15",
       time: "2:00 PM",
       duration: "2 hours",
-      description: "Practical workshop on life insurance sales techniques",
+      description: "Interactive workshop on Grade 5 curriculum teaching methodologies and assessment",
       zoomLink: "https://zoom.us/j/987654321",
       meetingId: "987 654 321",
       attendance: 0,
-      totalStudents: 30,
+      totalStudents: 38,
       isCompleted: false
     },
     {
       id: 3,
-      title: "Insurance Portfolio Management",
+      title: "Grade 8 Curriculum Implementation",
       date: "Sat, Jun 8",
       time: "11:00 AM",
       duration: "1.5 hours",
-      description: "Strategic approaches to insurance portfolio management",
-      attendance: 18,
-      totalStudents: 25,
-      recordingUrl: "https://example.com/recording/insurance-portfolio-management.mp4",
+      description: "Strategic approaches to implementing Grade 8 K-12 curriculum and learning outcomes",
+      attendance: 35,
+      totalStudents: 42,
+      recordingUrl: "https://example.com/recording/grade8-curriculum.mp4",
       isCompleted: true
     },
     {
       id: 4,
-      title: "Insurance Compliance Updates",
+      title: "K-12 Phase 2 Overview Session",
       date: "Wed, Jun 5",
       time: "3:00 PM",
       duration: "1 hour",
-      description: "Latest updates in insurance regulatory compliance requirements",
-      attendance: 22,
-      totalStudents: 30,
-      recordingUrl: "https://example.com/recording/insurance-compliance.mp4",
+      description: "Overview of Revised K to 12 Curriculum Phase 2 Implementation for all grade levels",
+      attendance: 50,
+      totalStudents: 55,
+      recordingUrl: "https://example.com/recording/k12-phase2-overview.mp4",
       isCompleted: true
     }
   ]);
@@ -167,7 +167,7 @@ const ZoomClassesSection = () => {
         <CardHeader className="bg-gradient-to-r from-purple-50 to-white flex flex-row items-center justify-between pb-4">
           <CardTitle className="text-xl flex items-center gap-2 text-purple-800">
             <Video className="h-6 w-6" />
-            Zoom Classes Management
+            Training Sessions Management
           </CardTitle>
           <Dialog open={isScheduleDialogOpen} onOpenChange={setIsScheduleDialogOpen}>
             <DialogTrigger asChild>

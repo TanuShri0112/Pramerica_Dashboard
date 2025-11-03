@@ -12,22 +12,22 @@ const CourseModules = () => {
   const modules = [
     { 
       id: 'module-1', 
-      title: 'Module 1: Foundations of Life Insurance', 
-      description: 'Understanding the basics and why protection matters',
+      title: 'Module 1: K-12 Curriculum Foundations', 
+      description: 'Introduction to revised K-12 curriculum framework and learning standards',
       imageUrl: '/placeholder.svg', 
       itemCount: 8 
     },
     { 
       id: 'module-2', 
-      title: 'Module 2: Key Benefits & Smart Flexibility', 
-      description: 'Exploring Rakshak Smart features, terms, and assured returns',
+      title: 'Module 2: Teaching Methodologies & Assessment', 
+      description: 'Effective instructional strategies and assessment frameworks for School Leaders',
       imageUrl: '/placeholder.svg', 
       itemCount: 6 
     },
     { 
       id: 'module-3', 
-      title: 'Module 3: Real-Life Scenarios & Payouts', 
-      description: 'Learning through practical examples and family protection cases',
+      title: 'Module 3: Implementation & Best Practices', 
+      description: 'Practical implementation strategies for Grades 2, 3, 5 & 8 curriculum',
       imageUrl: '/placeholder.svg', 
       itemCount: 7 
     }

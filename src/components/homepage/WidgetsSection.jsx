@@ -7,20 +7,20 @@ import { motion } from "framer-motion";
 const groups = [
   {
     id: 1,
-    name: "Sales Agents",
-    desc: "Insurance sales training group",
+    name: "Elementary School Leaders",
+    desc: "Grades 2 & 3 training cohort",
     img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
   },
   {
     id: 2,
-    name: "Training Managers",
-    desc: "Sales training coordination group",
+    name: "Intermediate Level Coordinators",
+    desc: "Grade 5 implementation team",
     img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=40&q=80",
   },
   {
     id: 3,
-    name: "New Agents",
-    desc: "Insurance license prep group",
+    name: "Junior High Leaders",
+    desc: "Grade 8 curriculum specialists",
     img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=40&q=80",
   },
 ];
@@ -28,22 +28,22 @@ const groups = [
 const catalog = [
   {
     id: 1,
-    name: "Insurance Fundamentals",
+    name: "K-12 Curriculum Overview",
     img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=40&q=80",
   },
   {
     id: 2,
-    name: "Life Insurance Sales",
+    name: "Grade 2 & 3 Implementation",
     img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
   },
   {
     id: 3,
-    name: "Sales Training",
+    name: "Grade 5 Curriculum Guide",
     img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=40&q=80",
   },
   {
     id: 4,
-    name: "Insurance Compliance",
+    name: "Grade 8 Teaching Materials",
     img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
   },
 ];

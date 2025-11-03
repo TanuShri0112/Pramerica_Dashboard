@@ -58,7 +58,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
 
   const handlePreliminaryProfileClick = () => {
     // Open Preliminary Profile in a new tab
-    window.open('https://bapco.netlify.app/', '_blank');
+    window.open('https://depedapayao.netlify.app/', '_blank');
     if (onItemClick) onItemClick();
   };
 
