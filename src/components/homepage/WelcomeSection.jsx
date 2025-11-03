@@ -14,7 +14,7 @@ export function WelcomeSection() {
   const slides = [
     {
       key: "welcome",
-      title: "Welcome to BAPCO!",
+      title: "Welcome to Beijing Mingde Zhixin Consulting Co. Ltd.!",
       subtitle: "We're glad to see you here.",
       body: "Check out the next slides for some useful tips on how to get started with your insurance and sales training journey.",
       onClick: () => {},
@@ -110,14 +110,14 @@ export function WelcomeSection() {
                     role="button"
                     aria-label={slide.title}
                   >
-                    <div className="bg-blue-600 rounded-2xl text-white flex flex-col md:flex-row items-center p-4 min-h-[160px] transition-shadow hover:shadow-lg relative overflow-hidden">
+                    <div className="bg-gradient-to-r from-teal-600 to-teal-700 rounded-2xl text-white flex flex-col md:flex-row items-center p-4 min-h-[160px] transition-shadow hover:shadow-lg relative overflow-hidden">
                       <div className="flex-1 min-w-0 z-10 pr-2">
                         <p className="font-bold text-lg mb-1">{slide.title}</p>
                         {slide.subtitle && <p className="mb-1 text-base">{slide.subtitle}</p>}
                         <p className="mb-3 text-sm leading-relaxed">{slide.body}</p>
                         {slide.ctaLabel && (
                           <button
-                            className="mt-1 px-3 py-1.5 bg-white text-blue-600 rounded-full font-semibold shadow text-sm hover:scale-105 transition-transform"
+                            className="mt-1 px-3 py-1.5 bg-white text-teal-600 rounded-full font-semibold shadow text-sm hover:scale-105 transition-transform"
                             onClick={e => {
                               e.stopPropagation();
                               slide.onClick();
@@ -132,7 +132,7 @@ export function WelcomeSection() {
                           <img
                             src={slide.imgSrc}
                             alt=""
-                            className="w-32 h-24 rounded-lg object-cover border-2 border-blue-400/30 bg-white/10 backdrop-blur-sm"
+                            className="w-32 h-24 rounded-lg object-cover border-2 border-teal-400/30 bg-white/10 backdrop-blur-sm"
                             draggable={false}
                           />
                         </div>
@@ -179,7 +179,7 @@ export function WelcomeSection() {
                 <button
                   key={idx}
                   className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                    idx === current - 1 ? 'bg-blue-600 w-6' : 'bg-gray-300'
+                    idx === current - 1 ? 'bg-teal-600 w-6' : 'bg-gray-300'
                   }`}
                   onClick={() => api?.scrollTo(idx)}
                 />

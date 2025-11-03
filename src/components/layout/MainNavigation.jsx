@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Home, Book, Users, Folder, FileText, BarChart2,
-  Grid, Settings, FileBox, MessageCircle, HelpCircle, Bot
+  Grid, Settings, FileBox, MessageCircle, HelpCircle
 } from 'lucide-react';
 import { NavItem } from './NavItem';
 import { useSidebar } from '@/contexts/SidebarContext';
@@ -47,23 +47,6 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
 
   const handleResourcesClick = () => {
     navigate('/resources');
-    if (onItemClick) onItemClick();
-  };
-
-  const handleScenarioAssessmentClick = () => {
-    // Open Scenario Assessment in a new tab
-    window.open('https://preview--rakshak-coach-62.lovable.app/', '_blank');
-    if (onItemClick) onItemClick();
-  };
-
-  const handlePreliminaryProfileClick = () => {
-    // Open Preliminary Profile in a new tab
-    window.open('https://bapco.netlify.app/', '_blank');
-    if (onItemClick) onItemClick();
-  };
-
-  const handleChatbotClick = () => {
-    navigate('/chatbot');
     if (onItemClick) onItemClick();
   };
 
@@ -152,45 +135,6 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
           />
         </motion.div>
         
-        {/* Scenario Assessment */}
-        <motion.div variants={itemVariants}>
-          <NavItem 
-            icon={FileText}
-            label="Scenario Assessment"
-            to="#"
-            active={false}
-            onClick={handleScenarioAssessmentClick}
-            collapsed={isMainCollapsed}
-            className="hover-lift"
-          />
-        </motion.div>
-        
-        {/* Preliminary Profile */}
-        <motion.div variants={itemVariants}>
-          <NavItem 
-            icon={FileText}
-            label="Preliminary Profile"
-            to="#"
-            active={false}
-            onClick={handlePreliminaryProfileClick}
-            collapsed={isMainCollapsed}
-            className="hover-lift"
-          />
-        </motion.div>
-
-        {/* Chatbot */}
-        <motion.div variants={itemVariants}>
-          <NavItem 
-            icon={Bot}
-            label="Chatbot"
-            to="/chatbot"
-            active={pathname.startsWith('/chatbot')}
-            onClick={handleChatbotClick}
-            collapsed={isMainCollapsed}
-            className="hover-lift"
-          />
-        </motion.div>
-        
         {/* Messages */}
         <motion.div variants={itemVariants}>
           <NavItem 
@@ -262,11 +206,11 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
               <HelpCircle className={cn(
                 "flex-shrink-0 transition-all duration-200", 
                 isMainCollapsed ? "h-5 w-5" : "h-5 w-5",
-                "text-gray-500 group-hover:text-blue-600 group-hover:scale-110"
+                "text-gray-500 group-hover:text-teal-600 group-hover:scale-110"
               )} />
               
               {!isMainCollapsed && (
-                <span className="truncate font-medium group-hover:text-blue-700 transition-colors duration-200">
+                <span className="truncate font-medium group-hover:text-teal-700 transition-colors duration-200">
                   Help & Support
                 </span>
               )}
@@ -279,28 +223,28 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
           >
             <DropdownMenuItem 
               onClick={() => handleHelpMenuClick('faqs')}
-              className="hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150 cursor-pointer"
+              className="hover:bg-teal-50 hover:text-teal-700 transition-colors duration-150 cursor-pointer"
             >
               <FileText className="mr-2 h-4 w-4" />
               FAQs
             </DropdownMenuItem>
             <DropdownMenuItem 
               onClick={() => handleHelpMenuClick('contact')}
-              className="hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150 cursor-pointer"
+              className="hover:bg-teal-50 hover:text-teal-700 transition-colors duration-150 cursor-pointer"
             >
               <MessageCircle className="mr-2 h-4 w-4" />
               Contact Support
             </DropdownMenuItem>
             <DropdownMenuItem 
               onClick={() => handleHelpMenuClick('guides')}
-              className="hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150 cursor-pointer"
+              className="hover:bg-teal-50 hover:text-teal-700 transition-colors duration-150 cursor-pointer"
             >
               <Book className="mr-2 h-4 w-4" />
               User Guides
             </DropdownMenuItem>
             <DropdownMenuItem 
               onClick={() => handleHelpMenuClick('ticket')}
-              className="hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150 cursor-pointer"
+              className="hover:bg-teal-50 hover:text-teal-700 transition-colors duration-150 cursor-pointer"
             >
               <FileText className="mr-2 h-4 w-4" />
               Support Ticket

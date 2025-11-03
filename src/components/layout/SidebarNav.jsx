@@ -61,7 +61,7 @@ export const SidebarNav = ({ onCloseMobile }) => {
       {/* Header */}
       <div 
         className={cn(
-          "flex h-16 items-center border-b border-gray-100 bg-blue-600",
+          "flex h-16 items-center border-b border-gray-100 bg-gradient-to-r from-teal-600 to-teal-700",
           isMainCollapsed ? "px-3 justify-center" : "px-6 justify-between"
         )}
       >
@@ -80,8 +80,7 @@ export const SidebarNav = ({ onCloseMobile }) => {
               </div>
               <div className="text-white">
                 <div>
-                  <h1 className="text-lg font-semibold">BAPCO</h1>
-                  <p className="text-sm">Athena LMS</p>
+                  <h1 className="text-xs font-semibold leading-tight">Beijing Mingde Zhixin Consulting Co. Ltd.</h1>
                 </div>
               </div>
             </div>

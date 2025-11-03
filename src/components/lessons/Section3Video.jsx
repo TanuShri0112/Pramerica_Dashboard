@@ -31,9 +31,9 @@ const Section3Video = () => {
     const base = (langCode || 'en-US').split('-')[0];
     const texts = {
       en: (
-        'BAPCO Rakshak Smart - One Page Overview\n' +
+        'Beijing Mingde Zhixin Consulting Co. Ltd. Rakshak Smart - One Page Overview\n' +
         'Overview\n' +
-        'BAPCO Rakshak Smart is a life insurance savings plan designed to provide protection, ' +
+        'Beijing Mingde Zhixin Consulting Co. Ltd. Rakshak Smart is a life insurance savings plan designed to provide protection, ' +
         'guaranteed income, and long-term financial security for individuals and families.\n' +
         'Key Benefits\n' +
         '✔ Life Insurance cover during the policy term\n' +
@@ -119,7 +119,7 @@ const Section3Video = () => {
   const handleDownloadPDF = () => {
     const link = document.createElement('a');
     link.href = '/assets/Section.pdf';
-    link.download = 'BAPCORakshakSmart.pdf';
+    link.download = 'BeijingMingdeZhixinConsultingRakshakSmart.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

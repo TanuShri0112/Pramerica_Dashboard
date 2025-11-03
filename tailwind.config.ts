@@ -64,14 +64,14 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					muted: 'hsl(var(--sidebar-muted))',
 				},
-				// Custom colors for BAPCO
+				// Custom colors for Beijing Mingde Zhixin Consulting Co. Ltd.
 				ca: {
-					primary: '#33C3F0',   // Update to match the blue buttons in the screenshots
-					secondary: '#1EAEDB',
-					tertiary: '#0FA0CE',
-					dark: '#1A202C',
-					light: '#EBF8FF',
-					gray: '#F7FAFC',
+					primary: '#0d9488',   // Teal-600 - Professional and modern
+					secondary: '#14b8a6',  // Teal-500
+					tertiary: '#2dd4bf',   // Teal-400
+					dark: '#134e4a',       // Teal-900
+					light: '#f0fdfa',      // Teal-50
+					gray: '#ccfbf1',       // Teal-100
 				},
 				status: {
 					active: '#34c759',     // Green
@@ -80,12 +80,12 @@ export default {
 				},
 				// Calendar specific colors
 				calendar: {
-					today: '#33C3F0',
+					today: '#0d9488',
 					event: {
-						default: '#33C3F0',
+						default: '#0d9488',
 						red: '#ea384c',
 						green: '#34c759',
-						blue: '#33C3F0', 
+						blue: '#14b8a6', 
 						purple: '#9b87f5',
 					},
 					grid: '#f1f0fb',
