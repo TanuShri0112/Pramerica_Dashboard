@@ -50,18 +50,6 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
     if (onItemClick) onItemClick();
   };
 
-  const handleScenarioAssessmentClick = () => {
-    // Open Scenario Assessment in a new tab
-    window.open('https://preview--rakshak-coach-62.lovable.app/', '_blank');
-    if (onItemClick) onItemClick();
-  };
-
-  const handlePreliminaryProfileClick = () => {
-    // Open Preliminary Profile in a new tab
-    window.open('https://depedapayao.netlify.app/', '_blank');
-    if (onItemClick) onItemClick();
-  };
-
   const handleChatbotClick = () => {
     navigate('/chatbot');
     if (onItemClick) onItemClick();
@@ -147,32 +135,6 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
             to="/catalog"
             active={pathname.startsWith('/catalog')}
             onClick={() => handleNavItemClick('/catalog')}
-            collapsed={isMainCollapsed}
-            className="hover-lift"
-          />
-        </motion.div>
-        
-        {/* Scenario Assessment */}
-        <motion.div variants={itemVariants}>
-          <NavItem 
-            icon={FileText}
-            label="Scenario Assessment"
-            to="#"
-            active={false}
-            onClick={handleScenarioAssessmentClick}
-            collapsed={isMainCollapsed}
-            className="hover-lift"
-          />
-        </motion.div>
-        
-        {/* Preliminary Profile */}
-        <motion.div variants={itemVariants}>
-          <NavItem 
-            icon={FileText}
-            label="Preliminary Profile"
-            to="#"
-            active={false}
-            onClick={handlePreliminaryProfileClick}
             collapsed={isMainCollapsed}
             className="hover-lift"
           />
