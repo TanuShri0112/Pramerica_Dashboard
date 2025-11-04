@@ -14,11 +14,15 @@ import { useSidebar } from '@/contexts/SidebarContext';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 import EditModulePage from '@/pages/EditModulePage';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 const ModuleCard = ({ module, onDelete, onUpdate, onComplete, courseType = 'open', onEdit, courseId }) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const navigate = useNavigate();
   const { setMainCollapsed } = useSidebar();
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const handleDelete = () => {
     if (window.confirm(`Are you sure you want to delete "${module.title}"?`)) {
@@ -108,11 +112,11 @@ const ModuleCard = ({ module, onDelete, onUpdate, onComplete, courseType = 'open
               <DropdownMenuContent align="end" className="bg-white border shadow-md">
                 <DropdownMenuItem onClick={handleEdit}>
                   <Edit className="h-4 w-4 mr-2" />
-                  Edit Module
+                  {t.editModule}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleDelete} className="text-red-600">
                   <Trash2 className="h-4 w-4 mr-2" />
-                  Delete Module
+                  {t.deleteModule}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -121,7 +125,7 @@ const ModuleCard = ({ module, onDelete, onUpdate, onComplete, courseType = 'open
             <div className="absolute bottom-4 left-4">
               <Badge className="bg-green-500 text-white">
                 <CheckCircle className="h-3 w-3 mr-1" />
-                Completed
+                {t.completed}
               </Badge>
             </div>
           )}
@@ -136,7 +140,7 @@ const ModuleCard = ({ module, onDelete, onUpdate, onComplete, courseType = 'open
           <p className="text-sm text-gray-600">{module.description}</p>
           {courseType === 'sequential' && (
             <Badge variant="outline" className="text-blue-600 border-blue-300 mt-2 w-fit">
-              Sequential
+              {t.sequential}
             </Badge>
           )}
         </CardHeader>
@@ -150,7 +154,7 @@ const ModuleCard = ({ module, onDelete, onUpdate, onComplete, courseType = 'open
               disabled={isLocked}
             >
               <BookOpen className="h-4 w-4 mr-2" />
-              View Lesson
+              {t.viewLesson}
               {isLocked && <Lock className="h-3 w-3 ml-auto" />}
             </Button>
 
@@ -161,7 +165,7 @@ const ModuleCard = ({ module, onDelete, onUpdate, onComplete, courseType = 'open
               disabled={isLocked}
             >
               <FileText className="h-4 w-4 mr-2" />
-              View Assessments
+              {t.viewAssessments}
               {isLocked && <Lock className="h-3 w-3 ml-auto" />}
             </Button>
 
@@ -171,7 +175,7 @@ const ModuleCard = ({ module, onDelete, onUpdate, onComplete, courseType = 'open
                 className="w-full bg-ca-primary hover:bg-ca-secondary text-white transition-colors duration-200"
               >
                 <CheckCircle className="h-4 w-4 mr-2" />
-                Mark as Complete
+                {t.markAsComplete}
               </Button>
             )}
           </div>
@@ -179,7 +183,7 @@ const ModuleCard = ({ module, onDelete, onUpdate, onComplete, courseType = 'open
           {isLocked && (
             <div className="mt-3 p-2 bg-yellow-50 rounded-md">
               <p className="text-xs text-yellow-700 text-center">
-                Complete the previous module to unlock this one
+                {t.unlockMessage}
               </p>
             </div>
           )}
@@ -188,7 +192,7 @@ const ModuleCard = ({ module, onDelete, onUpdate, onComplete, courseType = 'open
 
       <Dialog open={isEditDialogOpen} onOpenChange={handleCloseDialog}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-          <DialogTitle className="sr-only">Edit Module</DialogTitle>
+          <DialogTitle className="sr-only">{t.editModule}</DialogTitle>
           <EditModulePage 
             module={module}
             onClose={handleCloseDialog}

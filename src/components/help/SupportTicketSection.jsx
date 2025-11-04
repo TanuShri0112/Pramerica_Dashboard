@@ -6,8 +6,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Plus, Paperclip, Send } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 export const SupportTicketSection = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [formData, setFormData] = useState({
     subject: '',
     priority: 'medium',
@@ -43,33 +47,33 @@ export const SupportTicketSection = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Create Support Ticket</h2>
+        <h2 className="text-2xl font-bold">{t.createSupportTicket}</h2>
         <p className="text-muted-foreground">
-          Fill out the form below to submit a support ticket to our team.
+          {t.supportTicketDesc}
         </p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>New Support Ticket</CardTitle>
+          <CardTitle>{t.newSupportTicket}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="subject">Subject</Label>
+                <Label htmlFor="subject">{t.subject}</Label>
                 <Input
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  placeholder="Briefly describe your issue"
+                  placeholder={language === 'en' ? "Briefly describe your issue" : "Descreva brevemente seu problema"}
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="priority">Priority</Label>
+                <Label htmlFor="priority">{t.priority}</Label>
                 <Select
                   name="priority"
                   value={formData.priority}
@@ -78,19 +82,19 @@ export const SupportTicketSection = () => {
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select priority" />
+                    <SelectValue placeholder={t.selectPriority} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="low">Low</SelectItem>
-                    <SelectItem value="medium">Medium</SelectItem>
-                    <SelectItem value="high">High</SelectItem>
-                    <SelectItem value="urgent">Urgent</SelectItem>
+                    <SelectItem value="low">{t.low}</SelectItem>
+                    <SelectItem value="medium">{t.medium}</SelectItem>
+                    <SelectItem value="high">{t.high}</SelectItem>
+                    <SelectItem value="urgent">{t.urgent}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="category">Category</Label>
+                <Label htmlFor="category">{t.category}</Label>
                 <Select
                   name="category"
                   value={formData.category}
@@ -99,34 +103,34 @@ export const SupportTicketSection = () => {
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue placeholder={t.selectCategory} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="technical">Technical Issue</SelectItem>
-                    <SelectItem value="billing">Billing</SelectItem>
-                    <SelectItem value="account">Account</SelectItem>
-                    <SelectItem value="feature">Feature Request</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
+                    <SelectItem value="technical">{t.technicalIssue}</SelectItem>
+                    <SelectItem value="billing">{t.billing}</SelectItem>
+                    <SelectItem value="account">{t.account}</SelectItem>
+                    <SelectItem value="feature">{t.featureRequest}</SelectItem>
+                    <SelectItem value="other">{t.other}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description">{t.description}</Label>
               <Textarea
                 id="description"
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                placeholder="Please provide detailed information about your issue"
+                placeholder={t.descriptionPlaceholder}
                 className="min-h-[200px]"
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label>Attachments</Label>
+              <Label>{t.attachments}</Label>
               <div className="flex items-center space-x-2">
                 <label className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-dashed rounded-md text-sm font-medium text-muted-foreground hover:bg-muted/50">
                   <input
@@ -136,10 +140,10 @@ export const SupportTicketSection = () => {
                     multiple
                   />
                   <Paperclip className="h-4 w-4 mr-2" />
-                  Add Files
+                  {t.addFiles}
                 </label>
                 <span className="text-sm text-muted-foreground">
-                  {attachments.length} file(s) attached
+                  {attachments.length} {t.filesAttached}
                 </span>
               </div>
 
@@ -173,7 +177,7 @@ export const SupportTicketSection = () => {
             <div className="flex justify-end">
               <Button type="submit">
                 <Send className="h-4 w-4 mr-2" />
-                Submit Ticket
+                {t.submitTicket}
               </Button>
             </div>
           </form>

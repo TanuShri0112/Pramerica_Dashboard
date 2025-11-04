@@ -17,8 +17,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 const Courses = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [view, setView] = useState('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [isEnrollDialogOpen, setIsEnrollDialogOpen] = useState(false);
@@ -167,9 +171,9 @@ const Courses = () => {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Courses</h1>
+          <h1 className="text-3xl font-bold tracking-tight">{t.coursesTitle}</h1>
           <p className="text-muted-foreground mt-2">
-            Manage your course catalog and create new learning experiences
+            {t.coursesDescription}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -179,11 +183,11 @@ const Courses = () => {
             className="flex items-center gap-2"
           >
             <UserPlus className="h-4 w-4" />
-            Enroll
+            {t.enroll}
           </Button>
           <Button onClick={handleCreateCourse}>
             <Plus className="h-4 w-4 mr-2" />
-            Create Course
+            {t.createCourse}
           </Button>
         </div>
       </div>
@@ -193,13 +197,13 @@ const Courses = () => {
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="bg-cyan-50 p-1">
             <PillTabsTrigger value="courses" className="data-[state=active]:bg-cyan-400 data-[state=active]:text-white">
-              Courses {courses.filter(c => !c.archived && !c.deleted).length}
+              {t.coursesTab} {courses.filter(c => !c.archived && !c.deleted).length}
             </PillTabsTrigger>
             <PillTabsTrigger value="archived" className="data-[state=active]:bg-cyan-400 data-[state=active]:text-white">
-              Archived {courses.filter(c => c.archived && !c.deleted).length}
+              {t.archivedTab} {courses.filter(c => c.archived && !c.deleted).length}
             </PillTabsTrigger>
             <PillTabsTrigger value="deleted" className="data-[state=active]:bg-cyan-400 data-[state=active]:text-white">
-              Deleted {courses.filter(c => c.deleted).length}
+              {t.deletedTab} {courses.filter(c => c.deleted).length}
             </PillTabsTrigger>
           </TabsList>
         </Tabs>
@@ -211,7 +215,7 @@ const Courses = () => {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input 
               className="pl-9" 
-              placeholder="Search courses..." 
+              placeholder={t.searchCourses} 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -219,25 +223,25 @@ const Courses = () => {
           
           <Select>
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="All levels" />
+              <SelectValue placeholder={t.allLevels} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All levels</SelectItem>
-              <SelectItem value="beginner">Beginner</SelectItem>
-              <SelectItem value="intermediate">Intermediate</SelectItem>
-              <SelectItem value="advanced">Advanced</SelectItem>
+              <SelectItem value="all">{t.allLevels}</SelectItem>
+              <SelectItem value="beginner">{t.beginner}</SelectItem>
+              <SelectItem value="intermediate">{t.intermediate}</SelectItem>
+              <SelectItem value="advanced">{t.advanced}</SelectItem>
             </SelectContent>
           </Select>
           
           <Select>
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="All status" />
+              <SelectValue placeholder={t.allStatus} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All status</SelectItem>
-              <SelectItem value="active">Active</SelectItem>
-              <SelectItem value="draft">Draft</SelectItem>
-              <SelectItem value="archived">Archived</SelectItem>
+              <SelectItem value="all">{t.allStatus}</SelectItem>
+              <SelectItem value="active">{t.active}</SelectItem>
+              <SelectItem value="draft">{t.draft}</SelectItem>
+              <SelectItem value="archived">{t.archived}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -250,7 +254,7 @@ const Courses = () => {
             className="flex items-center gap-2"
           >
             <Compass className="h-4 w-4" />
-            Catalog
+            {t.catalog}
           </Button>
 
           {/* Removed Sequential/Open Toggle */}
@@ -260,11 +264,11 @@ const Courses = () => {
             <TabsList>
               <TabsTrigger value="grid" className="flex items-center gap-2">
                 <Grid className="h-4 w-4" />
-                Grid
+                {t.grid}
               </TabsTrigger>
               <TabsTrigger value="list" className="flex items-center gap-2">
                 <List className="h-4 w-4" />
-                List
+                {t.list}
               </TabsTrigger>
             </TabsList>
           </Tabs>
@@ -286,7 +290,11 @@ const Courses = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
                 <div className="absolute top-2 right-2 flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                   <Badge className={getStatusColor(course.status)}>
-                    {course.status}
+                    {language === 'en' ? course.status : 
+                      course.status === 'Active' ? t.active :
+                      course.status === 'Published' ? t.published :
+                      course.status === 'Draft' ? t.draft :
+                      course.status === 'Archived' ? t.archived : course.status}
                   </Badge>
                   <div className="bg-white/90 rounded-md">
                     <CourseOptionsMenu 
@@ -313,7 +321,10 @@ const Courses = () => {
               <CardContent onClick={() => handleCourseClick(course.id)}>
                 <div className="flex items-center justify-between mb-3">
                   <Badge variant="outline" className={getLevelColor(course.level)}>
-                    {course.level}
+                    {language === 'en' ? course.level :
+                      course.level === 'Beginner' ? t.beginner :
+                      course.level === 'Intermediate' ? t.intermediate :
+                      course.level === 'Advanced' ? t.advanced : course.level}
                   </Badge>
                   <Badge variant="outline" className="text-xs">
                     {course.catalog}
@@ -322,7 +333,7 @@ const Courses = () => {
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Users className="h-4 w-4" />
-                    <span>{course.students} students</span>
+                    <span>{course.students} {t.students}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="h-4 w-4" />
@@ -340,14 +351,14 @@ const Courses = () => {
               <table className="w-full">
                 <thead>
                   <tr className="border-b bg-muted/50">
-                    <th className="text-left p-4 font-medium">Course</th>
-                    <th className="text-left p-4 font-medium">Catalog</th>
-                    <th className="text-left p-4 font-medium">Students</th>
-                    <th className="text-left p-4 font-medium">Duration</th>
-                    <th className="text-left p-4 font-medium">Level</th>
-                    <th className="text-left p-4 font-medium">Status</th>
-                    <th className="text-left p-4 font-medium">Access Type</th>
-                    <th className="text-left p-4 font-medium">Actions</th>
+                    <th className="text-left p-4 font-medium">{t.course}</th>
+                    <th className="text-left p-4 font-medium">{t.catalog}</th>
+                    <th className="text-left p-4 font-medium">{t.students}</th>
+                    <th className="text-left p-4 font-medium">{t.duration}</th>
+                    <th className="text-left p-4 font-medium">{t.level}</th>
+                    <th className="text-left p-4 font-medium">{t.status}</th>
+                    <th className="text-left p-4 font-medium">{t.accessType}</th>
+                    <th className="text-left p-4 font-medium">{t.actions}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -392,22 +403,29 @@ const Courses = () => {
                       </td>
                       <td className="p-4">
                         <Badge variant="outline" className={getLevelColor(course.level)}>
-                          {course.level}
+                          {language === 'en' ? course.level :
+                            course.level === 'Beginner' ? t.beginner :
+                            course.level === 'Intermediate' ? t.intermediate :
+                            course.level === 'Advanced' ? t.advanced : course.level}
                         </Badge>
                       </td>
                       <td className="p-4">
                         <Badge className={getStatusColor(course.status)}>
-                          {course.status}
+                          {language === 'en' ? course.status :
+                            course.status === 'Active' ? t.active :
+                            course.status === 'Published' ? t.published :
+                            course.status === 'Draft' ? t.draft :
+                            course.status === 'Archived' ? t.archived : course.status}
                         </Badge>
                       </td>
                       <td className="p-4">
                         {courseType === 'sequential' ? (
                           <Badge variant="outline" className="text-orange-600 border-orange-300">
-                            Sequential
+                            {t.sequential}
                           </Badge>
                         ) : (
                           <Badge className="bg-green-500 text-white border-green-400">
-                            Open Access
+                            {t.openAccess}
                           </Badge>
                         )}
                       </td>

@@ -13,6 +13,8 @@ import { AddResourceDialog } from '@/components/resources/AddResourceDialog';
 import { FileUploadTab } from '@/components/resources/FileUploadTab';
 import { ResourceDetailDialog } from '@/components/resources/ResourceDetailDialog';
 import { EditResourceDialog } from '@/components/resources/EditResourceDialog';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 /**
  * JSDoc type definitions for clarity and editor support.
@@ -145,6 +147,8 @@ const initialResourcesData = [
 ];
 
 const Resources = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [activeTab, setActiveTab] = useState('catalog');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedResource, setSelectedResource] = useState(null);
@@ -229,8 +233,8 @@ const Resources = () => {
   return (
     <div className="p-6 animate-fade-in max-w-7xl mx-auto">
       <PageHeader 
-        title="Resources" 
-        description="Manage and access all your learning resources" 
+        title={t.resourcesTitle} 
+        description={t.resourcesDescription} 
       />
 
       {/* Search Bar */}
@@ -239,7 +243,7 @@ const Resources = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             type="text"
-            placeholder="Search resources..."
+            placeholder={t.searchResources}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -257,12 +261,12 @@ const Resources = () => {
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="catalog" className="flex items-center gap-2">
                 <List className="h-4 w-4" />
-                <span className="hidden sm:inline">Catalog</span>
+                <span className="hidden sm:inline">{t.catalogTab}</span>
                 <span className="ml-1 bg-gray-200 text-gray-700 text-xs px-2 py-0.5 rounded-full">2694</span>
               </TabsTrigger>
               <TabsTrigger value="uploaded" className="flex items-center gap-2">
                 <Upload className="h-4 w-4" />
-                <span className="hidden sm:inline">Uploaded files</span>
+                <span className="hidden sm:inline">{t.uploadedFiles}</span>
               </TabsTrigger>
             </TabsList>
           </Tabs>
@@ -274,7 +278,7 @@ const Resources = () => {
               onClick={handleAddResource}
             >
               <Plus className="h-4 w-4 mr-2" />
-              Add
+              {t.add}
             </Button>
             <div className="flex border rounded-md">
               <Button 
@@ -349,7 +353,7 @@ const Resources = () => {
           <div className="grid md:grid-cols-[3fr_2fr] gap-6">
             {selectedResource?.content?.skills && (
               <div className="space-y-4">
-                <h3 className="font-medium text-lg">Skill</h3>
+                <h3 className="font-medium text-lg">{t.skill}</h3>
                 {selectedResource.content.skills.map((skillCategory, index) => (
                   <div key={index} className="space-y-2">
                     <h4 className="font-medium">{index + 1}. {skillCategory.category}</h4>
@@ -366,25 +370,25 @@ const Resources = () => {
             <div className="space-y-6">
               {selectedResource?.content?.library && (
                 <div className="bg-gray-50 p-4 rounded-md border">
-                  <h3 className="font-medium text-lg mb-4">Library</h3>
+                  <h3 className="font-medium text-lg mb-4">{t.library}</h3>
                   <div className="space-y-3">
                     <div className="flex gap-2 items-center">
                       <List className="h-4 w-4 text-blue-500" />
-                      <span className="text-sm font-medium">Type:</span>
+                      <span className="text-sm font-medium">{t.type}:</span>
                       <span className="text-sm">{selectedResource.content.library.type}</span>
                     </div>
                     <div className="flex gap-2 items-center">
                       <FileText className="h-4 w-4 text-blue-500" />
-                      <span className="text-sm font-medium">Scope:</span>
+                      <span className="text-sm font-medium">{t.scope}:</span>
                       <span className="text-sm">{selectedResource.content.library.scope}</span>
                     </div>
                     <div className="flex gap-2 items-center">
-                      <span className="text-sm font-medium">Favorite:</span>
+                      <span className="text-sm font-medium">{t.favorite}:</span>
                       <span className={cn(
                         "text-sm",
                         selectedResource.content.library.favorite ? "text-blue-500" : ""
                       )}>
-                        {selectedResource.content.library.favorite ? "Favorite" : "Not favorite"}
+                        {selectedResource.content.library.favorite ? t.favorite : t.notFavorite}
                       </span>
                     </div>
                   </div>
@@ -393,18 +397,18 @@ const Resources = () => {
               
               {selectedResource?.content?.metadata && (
                 <div>
-                  <h3 className="font-medium text-lg mb-4">Metadata</h3>
+                  <h3 className="font-medium text-lg mb-4">{t.metadata}</h3>
                   <div className="space-y-4">
                     <div>
-                      <h4 className="text-sm font-medium">Creator</h4>
+                      <h4 className="text-sm font-medium">{t.creator}</h4>
                       <p className="text-blue-500">{selectedResource.content.metadata.creator}</p>
                     </div>
                     <div>
-                      <h4 className="text-sm font-medium">Created</h4>
+                      <h4 className="text-sm font-medium">{t.created}</h4>
                       <p>{selectedResource.content.metadata.created}</p>
                     </div>
                     <div>
-                      <h4 className="text-sm font-medium">Tags</h4>
+                      <h4 className="text-sm font-medium">{t.tags}</h4>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {selectedResource.content.metadata.tags.map((tag, i) => (
                           <span key={i} className="text-xs bg-gray-100 px-2 py-1 rounded">{tag}</span>
@@ -420,7 +424,7 @@ const Resources = () => {
                   className="w-full bg-blue-500 hover:bg-blue-600"
                   onClick={handleDetailsClick}
                 >
-                  Details
+                  {t.details}
                 </Button>
               </div>
             </div>

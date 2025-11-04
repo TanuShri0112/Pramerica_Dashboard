@@ -12,13 +12,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ThemeToggle } from "../theme/ThemeToggle";
+import { LanguageSelector } from "../language/LanguageSelector";
 import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 export const Header = ({ onMenuClick }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { language } = useLanguage();
+  const t = translations[language];
   const [userAvatar, setUserAvatar] = useState('/lovable-uploads/b22d4431-7c74-430d-aa30-15d8739a7fbf.png');
   const [avatarKey, setAvatarKey] = useState(Date.now());
   
@@ -118,7 +123,7 @@ export const Header = ({ onMenuClick }) => {
             className="text-lg font-semibold cursor-pointer hover:text-slate-600 transition-colors text-slate-800"
             onClick={handleAthenaLMSClick}
           >
-            Athena LMS
+            {t.athenaLMS}
           </h1>
         </div>
         
@@ -130,7 +135,7 @@ export const Header = ({ onMenuClick }) => {
             <input
               type="search"
               className="w-full py-1.5 pl-10 pr-4 text-sm text-gray-900 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
-              placeholder="Search..."
+              placeholder={t.search}
             />
           </div>
 
@@ -166,6 +171,8 @@ export const Header = ({ onMenuClick }) => {
               <Recycle className="h-5 w-5" />
             </Button> */}
           </div>
+          
+          <LanguageSelector />
           
           <ThemeToggle />
           
@@ -206,17 +213,17 @@ export const Header = ({ onMenuClick }) => {
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => navigate('/profile')}>
                 <User className="mr-2 h-4 w-4" />
-                <span>Profile</span>
+                <span>{t.profile}</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => {
                 toast({
-                  title: "Logged out",
+                  title: t.logout,
                   description: "You have been logged out successfully",
                   duration: 2000,
                 });
               }}>
-                Log out
+                {t.logout}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -228,7 +235,7 @@ export const Header = ({ onMenuClick }) => {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
-              Calendar & Events
+              {t.calendar}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
@@ -289,7 +296,7 @@ export const Header = ({ onMenuClick }) => {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Inbox className="h-5 w-5" />
-              Inbox Messages
+              {t.inbox}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-3">
@@ -377,7 +384,7 @@ export const Header = ({ onMenuClick }) => {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Bell className="h-5 w-5" />
-              Notifications
+              {t.notifications}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-3">

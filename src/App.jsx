@@ -7,6 +7,7 @@ import { AdminLayout } from "./components/layout/AdminLayout";
 import { SidebarProvider } from "./contexts/SidebarContext";
 import { UserFilterProvider } from "./contexts/UserFilterContext";
 import { CourseSidebarProvider } from "./contexts/CourseSidebarContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 // Import all assessment components
 import MultipleChoiceQuiz from "./components/assessments/MultipleChoiceQuiz";
 import TrueFalseQuiz from "./components/assessments/TrueFalseQuiz";
@@ -92,10 +93,11 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <SidebarProvider>
-          <UserFilterProvider>
-            <CourseSidebarProvider>
-              <Routes>
+        <LanguageProvider>
+          <SidebarProvider>
+            <UserFilterProvider>
+              <CourseSidebarProvider>
+                <Routes>
                 <Route path="/" element={<AdminLayout />}>
                   {/* Main pages */}
                   <Route index element={<Dashboard />} />
@@ -174,10 +176,11 @@ const App = () => (
                   <Route path="assessment/project-submission" element={<ProjectSubmission />} />
                   <Route path="assessment/proctored" element={<ProcturedExamination />} />
                 </Route>
-              </Routes>
-            </CourseSidebarProvider>
-          </UserFilterProvider>
-        </SidebarProvider>
+                </Routes>
+              </CourseSidebarProvider>
+            </UserFilterProvider>
+          </SidebarProvider>
+        </LanguageProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

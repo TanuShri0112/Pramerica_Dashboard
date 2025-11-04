@@ -3,53 +3,109 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Users, Folder } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from '@/contexts/LanguageContext';
 
-const groups = [
-  {
-    id: 1,
-    name: "Elementary School Leaders",
-    desc: "Grades 2 & 3 training cohort",
-    img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
-  },
-  {
-    id: 2,
-    name: "Intermediate Level Coordinators",
-    desc: "Grade 5 implementation team",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=40&q=80",
-  },
-  {
-    id: 3,
-    name: "Junior High Leaders",
-    desc: "Grade 8 curriculum specialists",
-    img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=40&q=80",
-  },
-];
+const getGroupsData = (language) => {
+  const groupsData = {
+    en: [
+      {
+        id: 1,
+        name: "Executive Branch Staff",
+        desc: "Municipal administration team",
+        img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
+      },
+      {
+        id: 2,
+        name: "Legislative Members",
+        desc: "Municipal council representatives",
+        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=40&q=80",
+      },
+      {
+        id: 3,
+        name: "Technical Support Team",
+        desc: "IT and database specialists",
+        img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=40&q=80",
+      },
+    ],
+    pt: [
+      {
+        id: 1,
+        name: "Equipe do Poder Executivo",
+        desc: "Equipe de administração municipal",
+        img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
+      },
+      {
+        id: 2,
+        name: "Membros Legislativos",
+        desc: "Representantes do conselho municipal",
+        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=40&q=80",
+      },
+      {
+        id: 3,
+        name: "Equipe de Suporte Técnico",
+        desc: "Especialistas em TI e banco de dados",
+        img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=40&q=80",
+      },
+    ]
+  };
+  return groupsData[language] || groupsData.en;
+};
 
-const catalog = [
-  {
-    id: 1,
-    name: "K-12 Curriculum Overview",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=40&q=80",
-  },
-  {
-    id: 2,
-    name: "Grade 2 & 3 Implementation",
-    img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
-  },
-  {
-    id: 3,
-    name: "Grade 5 Curriculum Guide",
-    img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=40&q=80",
-  },
-  {
-    id: 4,
-    name: "Grade 8 Teaching Materials",
-    img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
-  },
-];
+const getCatalogData = (language) => {
+  const catalogData = {
+    en: [
+      {
+        id: 1,
+        name: "Public Management Overview",
+        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=40&q=80",
+      },
+      {
+        id: 2,
+        name: "Database Conversion Services",
+        img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
+      },
+      {
+        id: 3,
+        name: "Technical Support Guide",
+        img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=40&q=80",
+      },
+      {
+        id: 4,
+        name: "Data Center Hosting",
+        img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
+      },
+    ],
+    pt: [
+      {
+        id: 1,
+        name: "Visão Geral da Gestão Pública",
+        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=40&q=80",
+      },
+      {
+        id: 2,
+        name: "Serviços de Conversão de Banco de Dados",
+        img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
+      },
+      {
+        id: 3,
+        name: "Guia de Suporte Técnico",
+        img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=40&q=80",
+      },
+      {
+        id: 4,
+        name: "Hospedagem de Data Center",
+        img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
+      },
+    ]
+  };
+  return catalogData[language] || catalogData.en;
+};
 
 export default function WidgetsSection() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const groups = getGroupsData(language);
+  const catalog = getCatalogData(language);
 
   const handleCatalogClick = () => {
     navigate("/catalog");
@@ -61,7 +117,9 @@ export default function WidgetsSection() {
 
   return (
     <section>
-      <h2 className="text-xl font-semibold mb-4 text-blue-900">Widgets</h2>
+      <h2 className="text-xl font-semibold mb-4 text-blue-900">
+        {language === 'en' ? 'Widgets' : 'Widgets'}
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Catalog Widget */}
         <motion.div whileHover={{ y: -5 }} transition={{ type: "spring", stiffness: 300 }}>
@@ -72,7 +130,7 @@ export default function WidgetsSection() {
             <CardHeader className="pb-2 flex flex-row items-center justify-between bg-gradient-to-r from-blue-50 to-white">
               <CardTitle className="flex items-center gap-2 text-base text-blue-800">
                 <Folder className="text-blue-500" />
-                Catalog overview
+                {language === 'en' ? 'Catalog overview' : 'Visão geral do catálogo'}
                 <span className="ml-1 bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full text-xs font-semibold">
                   {catalog.length}
                 </span>
@@ -110,7 +168,7 @@ export default function WidgetsSection() {
             <CardHeader className="pb-2 flex flex-row items-center justify-between bg-gradient-to-r from-blue-50 to-white">
               <CardTitle className="flex items-center gap-2 text-base text-blue-800">
                 <Users className="text-blue-500" />
-                Groups
+                {language === 'en' ? 'Groups' : 'Grupos'}
                 <span className="ml-1 bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full text-xs font-semibold">
                   {groups.length}
                 </span>

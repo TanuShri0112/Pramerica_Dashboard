@@ -7,6 +7,8 @@ import { NavItem } from './NavItem';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { useUserFilter } from '@/contexts/UserFilterContext';
 import { useCourseSidebar } from '@/contexts/CourseSidebarContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -22,6 +24,8 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
   const { isMainCollapsed } = useSidebar();
   const { isFilterMenuOpen, setIsFilterMenuOpen } = useUserFilter();
   const { openCourseSidebar, setCourseTitle } = useCourseSidebar();
+  const { language } = useLanguage();
+  const t = translations[language];
   const location = useLocation();
   const navigate = useNavigate();
   
@@ -87,7 +91,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
         <motion.div variants={itemVariants}>
           <NavItem 
             icon={Home} 
-            label="Home" 
+            label={t.home} 
             to="/" 
             active={pathname === '/'} 
             onClick={() => handleNavItemClick('/')}
@@ -100,7 +104,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
         <motion.div variants={itemVariants}>
           <NavItem 
             icon={Book} 
-            label="Courses" 
+            label={t.courses} 
             to="/courses" 
             active={pathname.startsWith('/courses')} 
             onClick={handleCourseClick}
@@ -113,7 +117,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
         <motion.div variants={itemVariants}>
           <NavItem 
             icon={Users} 
-            label="Groups" 
+            label={t.groups} 
             to="/groups" 
             active={pathname.startsWith('/groups')}
             onClick={handleGroupsClick}
@@ -126,7 +130,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
         <motion.div variants={itemVariants}>
           <NavItem 
             icon={Folder}
-            label="Catalog"
+            label={t.catalog}
             to="/catalog"
             active={pathname.startsWith('/catalog')}
             onClick={() => handleNavItemClick('/catalog')}
@@ -139,7 +143,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
         <motion.div variants={itemVariants}>
           <NavItem 
             icon={MessageCircle}
-            label="Messages"
+            label={t.messages}
             to="/messages"
             active={pathname.startsWith('/messages')}
             onClick={() => handleNavItemClick('/messages')}
@@ -152,7 +156,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
         <motion.div variants={itemVariants} className="relative">
           <NavItem 
             icon={FileText} 
-            label="Users" 
+            label={t.users} 
             to="/users" 
             active={pathname.startsWith('/users')} 
             onClick={handleUserClick}
@@ -165,7 +169,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
         <motion.div variants={itemVariants}>
           <NavItem
             icon={FileBox}
-            label="Resources"
+            label={t.resources}
             to="/resources"
             active={pathname.startsWith('/resources')}
             onClick={handleResourcesClick}
@@ -178,7 +182,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
         <motion.div variants={itemVariants}>
           <NavItem 
             icon={BarChart2}
-            label="Reports"
+            label={t.reports}
             to="/reports"
             active={pathname === '/reports'}
             onClick={() => handleNavItemClick('/reports')}
@@ -201,7 +205,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
                 "transform hover:-translate-y-0.5",
                 isMainCollapsed && "justify-center px-2"
               )}
-              title={isMainCollapsed ? "Help & Support" : undefined}
+              title={isMainCollapsed ? t.helpSupport : undefined}
             >
               <HelpCircle className={cn(
                 "flex-shrink-0 transition-all duration-200", 
@@ -211,7 +215,7 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
               
               {!isMainCollapsed && (
                 <span className="truncate font-medium group-hover:text-blue-700 transition-colors duration-200">
-                  Help & Support
+                  {t.helpSupport}
                 </span>
               )}
             </button>
@@ -226,28 +230,28 @@ export const MainNavigation = ({ pathname, onItemClick }) => {
               className="hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150 cursor-pointer"
             >
               <FileText className="mr-2 h-4 w-4" />
-              FAQs
+              {t.faqs}
             </DropdownMenuItem>
             <DropdownMenuItem 
               onClick={() => handleHelpMenuClick('contact')}
               className="hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150 cursor-pointer"
             >
               <MessageCircle className="mr-2 h-4 w-4" />
-              Contact Support
+              {t.contactSupport}
             </DropdownMenuItem>
             <DropdownMenuItem 
               onClick={() => handleHelpMenuClick('guides')}
               className="hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150 cursor-pointer"
             >
               <Book className="mr-2 h-4 w-4" />
-              User Guides
+              {t.userGuides}
             </DropdownMenuItem>
             <DropdownMenuItem 
               onClick={() => handleHelpMenuClick('ticket')}
               className="hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150 cursor-pointer"
             >
               <FileText className="mr-2 h-4 w-4" />
-              Support Ticket
+              {t.supportTicket}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

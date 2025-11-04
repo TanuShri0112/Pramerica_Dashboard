@@ -10,8 +10,12 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 const ZoomClassesSection = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [classes, setClasses] = useState([
     {
       id: 1,
@@ -167,35 +171,35 @@ const ZoomClassesSection = () => {
         <CardHeader className="bg-gradient-to-r from-purple-50 to-white flex flex-row items-center justify-between pb-4">
           <CardTitle className="text-xl flex items-center gap-2 text-purple-800">
             <Video className="h-6 w-6" />
-            Training Sessions Management
+            {t.trainingSessionsManagement}
           </CardTitle>
           <Dialog open={isScheduleDialogOpen} onOpenChange={setIsScheduleDialogOpen}>
             <DialogTrigger asChild>
               <Button className="bg-blue-600 hover:bg-blue-700">
                 <Plus className="h-4 w-4 mr-2" />
-                Schedule New Class
+                {t.scheduleNewClass}
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-md">
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-2">
                   <Video className="h-5 w-5" />
-                  Schedule New Class
+                  {t.scheduleNewClass}
                 </DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="title">Class Title *</Label>
+                  <Label htmlFor="title">{t.classTitle} *</Label>
                   <Input
                     id="title"
-                    placeholder="Enter class title"
+                    placeholder={language === 'en' ? 'Enter class title' : 'Digite o título da aula'}
                     value={newClass.title}
                     onChange={(e) => setNewClass({...newClass, title: e.target.value})}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="date">Date *</Label>
+                    <Label htmlFor="date">{t.date} *</Label>
                     <Input
                       id="date"
                       type="date"
@@ -204,7 +208,7 @@ const ZoomClassesSection = () => {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="time">Time *</Label>
+                    <Label htmlFor="time">{t.time} *</Label>
                     <Input
                       id="time"
                       type="time"
@@ -214,7 +218,7 @@ const ZoomClassesSection = () => {
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="duration">Duration</Label>
+                  <Label htmlFor="duration">{t.duration}</Label>
                   <Select value={newClass.duration} onValueChange={(value) => setNewClass({...newClass, duration: value})}>
                     <SelectTrigger>
                       <SelectValue />
@@ -229,16 +233,16 @@ const ZoomClassesSection = () => {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="description">Description</Label>
+                  <Label htmlFor="description">{t.description}</Label>
                   <Textarea
                     id="description"
-                    placeholder="Enter class description"
+                    placeholder={language === 'en' ? 'Enter class description' : 'Digite a descrição da aula'}
                     value={newClass.description}
                     onChange={(e) => setNewClass({...newClass, description: e.target.value})}
                   />
                 </div>
                 <div>
-                  <Label htmlFor="zoomLink">Zoom Meeting Link (optional)</Label>
+                  <Label htmlFor="zoomLink">{t.zoomMeetingLink}</Label>
                   <Input
                     id="zoomLink"
                     placeholder="https://zoom.us/j/..."
@@ -248,10 +252,10 @@ const ZoomClassesSection = () => {
                 </div>
                 <div className="flex gap-2 pt-4">
                   <Button onClick={handleScheduleClass} className="flex-1">
-                    Schedule Class
+                    {t.scheduleClass}
                   </Button>
                   <Button variant="outline" onClick={() => setIsScheduleDialogOpen(false)}>
-                    Cancel
+                    {t.cancel}
                   </Button>
                 </div>
               </div>
@@ -263,11 +267,11 @@ const ZoomClassesSection = () => {
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="upcoming" className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
-                Upcoming Classes
+                {t.upcomingClasses}
               </TabsTrigger>
               <TabsTrigger value="completed" className="flex items-center gap-2">
                 <Video className="h-4 w-4" />
-                Completed Classes
+                {t.completedClasses}
               </TabsTrigger>
             </TabsList>
             
@@ -315,7 +319,7 @@ const ZoomClassesSection = () => {
                               className="bg-blue-600 hover:bg-blue-700"
                             >
                               <ExternalLink className="h-4 w-4 mr-1" />
-                              Join via Zoom
+                              {t.joinViaZoom}
                             </Button>
                           )}
                         </div>
@@ -330,7 +334,7 @@ const ZoomClassesSection = () => {
                 ) : (
                   <div className="text-center py-8 text-gray-500">
                     <Video className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                    <p>No upcoming classes scheduled</p>
+                    <p>{t.noUpcomingClasses}</p>
                   </div>
                 )}
               </div>
@@ -379,7 +383,7 @@ const ZoomClassesSection = () => {
                             onClick={() => handleViewRecording(cls)}
                           >
                             <Eye className="h-4 w-4 mr-1" />
-                            View Recording
+                            {t.viewRecording}
                           </Button>
                           <Button
                             size="sm"
@@ -387,7 +391,7 @@ const ZoomClassesSection = () => {
                             onClick={() => handleDownloadRecording(cls)}
                           >
                             <Download className="h-4 w-4 mr-1" />
-                            Download
+                            {t.download}
                           </Button>
                         </div>
                         <div>
@@ -401,7 +405,7 @@ const ZoomClassesSection = () => {
                 ) : (
                   <div className="text-center py-8 text-gray-500">
                     <Video className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                    <p>No completed classes yet</p>
+                    <p>{t.noCompletedClasses}</p>
                   </div>
                 )}
               </div>
@@ -416,13 +420,13 @@ const ZoomClassesSection = () => {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Edit className="h-5 w-5" />
-              Edit Class
+              {t.editClass}
             </DialogTitle>
           </DialogHeader>
           {editingClass && (
             <div className="space-y-4">
               <div>
-                <Label htmlFor="edit-title">Class Title</Label>
+                <Label htmlFor="edit-title">{t.classTitle}</Label>
                 <Input
                   id="edit-title"
                   value={editingClass.title}
@@ -430,7 +434,7 @@ const ZoomClassesSection = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="edit-duration">Duration</Label>
+                <Label htmlFor="edit-duration">{t.duration}</Label>
                 <Select 
                   value={editingClass.duration} 
                   onValueChange={(value) => setEditingClass({...editingClass, duration: value})}
@@ -448,7 +452,7 @@ const ZoomClassesSection = () => {
                 </Select>
               </div>
               <div>
-                <Label htmlFor="edit-description">Description</Label>
+                <Label htmlFor="edit-description">{t.description}</Label>
                 <Textarea
                   id="edit-description"
                   value={editingClass.description}
@@ -457,10 +461,10 @@ const ZoomClassesSection = () => {
               </div>
               <div className="flex gap-2 pt-4">
                 <Button onClick={handleEditClass} className="flex-1">
-                  Update Class
+                  {t.updateClass}
                 </Button>
                 <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
-                  Cancel
+                  {t.cancel}
                 </Button>
               </div>
             </div>
@@ -482,12 +486,12 @@ const ZoomClassesSection = () => {
               <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
                 <div className="text-center">
                   <Video className="h-16 w-16 mx-auto mb-4 text-gray-400" />
-                  <p className="text-gray-600 mb-2">Recording Player</p>
+                  <p className="text-gray-600 mb-2">{t.recordingPlayer}</p>
                   <p className="text-sm text-gray-500">
-                    Class held on {selectedRecording.date} at {selectedRecording.time}
+                    {t.classHeldOn} {selectedRecording.date} {language === 'en' ? 'at' : 'às'} {selectedRecording.time}
                   </p>
                   <p className="text-sm text-gray-500">
-                    Attendance: {selectedRecording.attendance}/{selectedRecording.totalStudents} students
+                    {t.attendance}: {selectedRecording.attendance}/{selectedRecording.totalStudents} {t.students}
                   </p>
                 </div>
               </div>
@@ -498,7 +502,7 @@ const ZoomClassesSection = () => {
                 </div>
                 <Button onClick={() => handleDownloadRecording(selectedRecording)}>
                   <Download className="h-4 w-4 mr-2" />
-                  Download Recording
+                  {t.downloadRecording}
                 </Button>
               </div>
             </div>

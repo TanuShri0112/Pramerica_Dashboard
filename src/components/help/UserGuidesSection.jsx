@@ -2,13 +2,18 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BookOpen, ArrowRight, FileText, Video, Download } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 export const UserGuidesSection = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  
   const guides = [
     {
       id: 1,
-      title: 'Getting Started Guide',
-      description: 'Learn how to set up your account and navigate the platform with our comprehensive guide.',
+      title: t.gettingStartedGuide,
+      description: t.gettingStartedDesc,
       icon: <BookOpen className="h-6 w-6 text-blue-600" />,
       type: 'PDF',
       size: '2.4 MB',
@@ -16,27 +21,27 @@ export const UserGuidesSection = () => {
     },
     {
       id: 2,
-      title: 'Video Tutorials',
-      description: 'Watch step-by-step video tutorials to master all the features of our platform.',
+      title: t.videoTutorials,
+      description: t.videoTutorialsDesc,
       icon: <Video className="h-6 w-6 text-purple-600" />,
-      type: 'Video Series',
+      type: language === 'en' ? 'Video Series' : 'Série de Vídeos',
       length: '45 min',
       link: '#'
     },
     {
       id: 3,
-      title: 'API Documentation',
-      description: 'Technical documentation for integrating with our API and building custom solutions.',
+      title: t.apiDocumentation,
+      description: t.apiDocumentationDesc,
       icon: <FileText className="h-6 w-6 text-green-600" />,
       type: 'Web',
       link: '#'
     },
     {
       id: 4,
-      title: 'Keyboard Shortcuts',
-      description: 'Boost your productivity with these handy keyboard shortcuts for common actions.',
+      title: t.keyboardShortcuts,
+      description: t.keyboardShortcutsDesc,
       icon: <FileText className="h-6 w-6 text-yellow-600" />,
-      type: 'Cheat Sheet',
+      type: language === 'en' ? 'Cheat Sheet' : 'Folha de Dicas',
       link: '#'
     }
   ];
@@ -44,22 +49,22 @@ export const UserGuidesSection = () => {
   const categories = [
     {
       id: 'all',
-      name: 'All Guides',
+      name: t.allGuides,
       count: 12
     },
     {
       id: 'getting-started',
-      name: 'Getting Started',
+      name: t.gettingStarted,
       count: 4
     },
     {
       id: 'features',
-      name: 'Features',
+      name: t.features,
       count: 5
     },
     {
       id: 'troubleshooting',
-      name: 'Troubleshooting',
+      name: t.troubleshooting,
       count: 3
     }
   ];
@@ -69,9 +74,9 @@ export const UserGuidesSection = () => {
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">User Guides & Documentation</h2>
+        <h2 className="text-2xl font-bold">{t.userGuidesDocumentation}</h2>
         <p className="text-muted-foreground">
-          Find helpful guides, tutorials, and documentation to get the most out of our platform.
+          {t.userGuidesDesc}
         </p>
       </div>
 
@@ -119,11 +124,11 @@ export const UserGuidesSection = () => {
               <div className="flex justify-between items-center mt-auto">
                 <Button variant="outline" size="sm" asChild>
                   <a href={guide.link} target="_blank" rel="noopener noreferrer">
-                    View Guide
+                    {t.viewGuide}
                   </a>
                 </Button>
                 <div className="text-xs text-muted-foreground">
-                  Last updated: {new Date().toLocaleDateString()}
+                  {t.lastUpdated}: {new Date().toLocaleDateString()}
                 </div>
               </div>
             </CardContent>
@@ -135,11 +140,11 @@ export const UserGuidesSection = () => {
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">Can't find what you're looking for?</h3>
-              <p className="text-gray-600">Our support team is always ready to help with any questions you might have.</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-1">{t.cantFindLooking}</h3>
+              <p className="text-gray-600">{t.supportTeamReady}</p>
             </div>
             <Button variant="default">
-              Contact Support <ArrowRight className="ml-2 h-4 w-4" />
+              {t.contactSupport} <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </CardContent>

@@ -36,8 +36,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 const Messages = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedContact, setSelectedContact] = useState(null);
   const [newMessage, setNewMessage] = useState('');
@@ -135,11 +139,11 @@ const Messages = () => {
   useEffect(() => {
     if (selectedContact) {
       // Load messages for selected contact
-      setMessages([
+      const sampleMessages = language === 'en' ? [
         {
           id: '1',
           senderId: selectedContact.id,
-          content: 'Hey there!',
+          content: 'Hey! Need help with the database migration module?',
           timestamp: '10:30 AM',
           isRead: true,
           isDelivered: true
@@ -147,7 +151,7 @@ const Messages = () => {
         {
           id: '2',
           senderId: 'me',
-          content: 'Hi! How are you?',
+          content: 'Yes, could you explain the conversion process?',
           timestamp: '10:31 AM',
           isRead: true,
           isDelivered: true
@@ -155,7 +159,7 @@ const Messages = () => {
         {
           id: '3',
           senderId: selectedContact.id,
-          content: "I'm doing great! Just finished the React module.",
+          content: "Sure! Just finished the Executive Branch System training.",
           timestamp: '10:33 AM',
           isRead: true,
           isDelivered: true
@@ -163,7 +167,7 @@ const Messages = () => {
         {
           id: '4',
           senderId: 'me',
-          content: "That's awesome! I'm still working on it.",
+          content: "Great! I'm reviewing the Legislative Platform module.",
           timestamp: '10:34 AM',
           isRead: false,
           isDelivered: true
@@ -171,14 +175,56 @@ const Messages = () => {
         {
           id: '5',
           senderId: selectedContact.id,
-          content: 'Let me know if you need any help with it.',
+          content: 'Let me know if you need any help with technical support.',
           timestamp: '10:36 AM',
           isRead: true,
           isDelivered: true
         }
-      ]);
+      ] : [
+        {
+          id: '1',
+          senderId: selectedContact.id,
+          content: 'Olá! Precisa de ajuda com o módulo de migração de banco de dados?',
+          timestamp: '10:30',
+          isRead: true,
+          isDelivered: true
+        },
+        {
+          id: '2',
+          senderId: 'me',
+          content: 'Sim, você poderia explicar o processo de conversão?',
+          timestamp: '10:31',
+          isRead: true,
+          isDelivered: true
+        },
+        {
+          id: '3',
+          senderId: selectedContact.id,
+          content: "Claro! Acabei de concluir o treinamento do Sistema do Poder Executivo.",
+          timestamp: '10:33',
+          isRead: true,
+          isDelivered: true
+        },
+        {
+          id: '4',
+          senderId: 'me',
+          content: "Ótimo! Estou revisando o módulo da Plataforma Legislativa.",
+          timestamp: '10:34',
+          isRead: false,
+          isDelivered: true
+        },
+        {
+          id: '5',
+          senderId: selectedContact.id,
+          content: 'Me avise se precisar de ajuda com suporte técnico.',
+          timestamp: '10:36',
+          isRead: true,
+          isDelivered: true
+        }
+      ];
+      setMessages(sampleMessages);
     }
-  }, [selectedContact]);
+  }, [selectedContact, language]);
 
   const handleSendMessage = () => {
     if (newMessage.trim() && selectedContact) {
@@ -279,14 +325,14 @@ const Messages = () => {
   };
 
   const handleUserSelect = (user) => {
-    const newContact = {
-      id: user.id.toString(),
-      name: user.name,
-      avatar: user.avatar,
-      lastMessage: 'Start a conversation...',
-      timestamp: 'now',
-      unreadCount: 0
-    };
+    const newContact =         {
+          id: user.id.toString(),
+          name: user.name,
+          avatar: user.avatar,
+          lastMessage: t.startConversation,
+          timestamp: language === 'en' ? 'now' : 'agora',
+          unreadCount: 0
+        };
     
     setContacts(prev => [newContact, ...prev]);
     setSelectedContact(newContact);
@@ -379,11 +425,11 @@ const Messages = () => {
       )}>
         {/* Header */}
         <div className="p-4 border-b border-gray-100 bg-white">
-          <h1 className="text-xl font-semibold text-gray-800 mb-3">Messages</h1>
+          <h1 className="text-xl font-semibold text-gray-800 mb-3">{t.messagesTitle}</h1>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
-              placeholder="Search contacts..."
+              placeholder={t.searchContacts}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 bg-gray-50 border-gray-200 focus:bg-white transition-colors"
@@ -444,21 +490,21 @@ const Messages = () => {
                 size="lg"
               >
                 <Plus className="h-5 w-5" />
-                <span>New Chat</span>
+                <span>{t.newChat}</span>
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-2">
                   <UserPlus className="h-5 w-5" />
-                  Select Contact
+                  {t.selectContact}
                 </DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
-                    placeholder="Search users..."
+                    placeholder={t.searchUsers}
                     value={userSearchQuery}
                     onChange={(e) => setUserSearchQuery(e.target.value)}
                     className="pl-10"
@@ -492,7 +538,7 @@ const Messages = () => {
                     {filteredUsers.length === 0 && (
                       <div className="text-center py-8 text-gray-500">
                         <UserPlus className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                        <p>No users found</p>
+                        <p>{t.noUsersFound}</p>
                       </div>
                     )}
                   </div>
@@ -571,7 +617,7 @@ const Messages = () => {
                               "text-xs mb-1",
                               message.senderId === 'me' ? "text-blue-100" : "text-gray-500"
                             )}>
-                              Voice message
+                              {t.voiceMessage}
                             </div>
                             <div className="text-sm font-medium">
                               {formatTime(message.duration || 0)}
@@ -598,7 +644,7 @@ const Messages = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium truncate">{message.fileName}</p>
-                            <p className="text-xs opacity-75">PDF Document</p>
+                            <p className="text-xs opacity-75">{t.pdfDocument}</p>
                           </div>
                         </div>
                       ) : (
@@ -654,7 +700,7 @@ const Messages = () => {
                       >
                         <Image className="h-5 w-5 text-blue-600 mr-3" />
                         <div className="text-left">
-                          <div className="font-medium text-gray-900">Add Images</div>
+                          <div className="font-medium text-gray-900">{t.addImages}</div>
                         </div>
                       </Button>
                       <Button
@@ -664,7 +710,7 @@ const Messages = () => {
                       >
                         <FileText className="h-5 w-5 text-blue-600 mr-3" />
                         <div className="text-left">
-                          <div className="font-medium text-gray-900">Add Files</div>
+                          <div className="font-medium text-gray-900">{t.addFiles}</div>
                         </div>
                       </Button>
                     </div>
@@ -673,7 +719,7 @@ const Messages = () => {
 
                 <div className="flex-1 relative">
                   <Input
-                    placeholder="Type a message..."
+                    placeholder={t.typeMessage}
                     value={newMessage}
                     onChange={handleInputChange}
                     onKeyPress={handleKeyPress}
@@ -695,7 +741,7 @@ const Messages = () => {
                     </PopoverTrigger>
                     <PopoverContent className="w-80 p-4" align="end">
                       <div className="flex justify-between items-center mb-3">
-                        <h4 className="font-medium">Emojis</h4>
+                        <h4 className="font-medium">{t.emojis}</h4>
                         <Button
                           variant="ghost"
                           size="icon"
@@ -783,8 +829,8 @@ const Messages = () => {
               <div className="mx-auto w-24 h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mb-6 shadow-lg">
                 <MessageCircle className="h-12 w-12 text-blue-500" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Select a conversation to start messaging</h3>
-              <p className="text-gray-500 leading-relaxed">Choose from your existing conversations or start a new one to connect with your learning community</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{t.selectConversation}</h3>
+              <p className="text-gray-500 leading-relaxed">{t.selectConversationDesc}</p>
             </div>
           </div>
         )}

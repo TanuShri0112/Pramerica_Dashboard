@@ -14,9 +14,13 @@ import {
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 const Catalog = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = translations[language];
   const [searchQuery, setSearchQuery] = useState('');
   const [isAddCatalogOpen, setIsAddCatalogOpen] = useState(false);
   const [isEditCatalogOpen, setIsEditCatalogOpen] = useState(false);
@@ -141,15 +145,15 @@ const Catalog = () => {
     <div className="container mx-auto p-6 animate-fade-in max-w-7xl">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Course Catalog</h1>
+          <h1 className="text-3xl font-bold tracking-tight">{t.courseCatalog}</h1>
           <p className="text-muted-foreground mt-2">
-            Manage course categories and organize your learning content
+            {t.courseCatalogDescription}
           </p>
         </div>
         
         <Button onClick={() => setIsAddCatalogOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
-          Add Catalog
+          {t.addCatalog}
         </Button>
       </div>
       
@@ -159,7 +163,7 @@ const Catalog = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             type="text"
-            placeholder="Search catalogs..."
+            placeholder={t.searchCatalogs}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -221,7 +225,7 @@ const Catalog = () => {
               </p>
               <div className="flex items-center justify-between">
                 <p className="text-sm text-blue-600 font-medium">
-                  {catalog.courseCount} courses
+                  {catalog.courseCount} {t.courses}
                 </p>
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
               </div>
@@ -232,7 +236,7 @@ const Catalog = () => {
       
       {filteredCatalogs.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">No catalogs found matching your search.</p>
+          <p className="text-gray-500 text-lg">{t.noCatalogsFound}</p>
         </div>
       )}
 
@@ -240,35 +244,35 @@ const Catalog = () => {
       <Dialog open={isAddCatalogOpen} onOpenChange={setIsAddCatalogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Create New Catalog</DialogTitle>
+            <DialogTitle>{t.createNewCatalog}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="catalogName">Catalog Name</Label>
+              <Label htmlFor="catalogName">{t.catalogName}</Label>
               <Input
                 id="catalogName"
                 value={newCatalogName}
                 onChange={(e) => setNewCatalogName(e.target.value)}
-                placeholder="Enter catalog name"
+                placeholder={t.enterCatalogName}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="catalogDescription">Description</Label>
+              <Label htmlFor="catalogDescription">{t.description}</Label>
               <Textarea
                 id="catalogDescription"
                 value={newCatalogDescription}
                 onChange={(e) => setNewCatalogDescription(e.target.value)}
-                placeholder="Enter catalog description"
+                placeholder={t.enterCatalogDescription}
                 rows={3}
               />
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsAddCatalogOpen(false)}>
-              Cancel
+              {t.cancel}
             </Button>
             <Button onClick={handleAddCatalog} disabled={!newCatalogName.trim()}>
-              Create Catalog
+              {t.createCatalog}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -278,35 +282,35 @@ const Catalog = () => {
       <Dialog open={isEditCatalogOpen} onOpenChange={setIsEditCatalogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Edit Catalog</DialogTitle>
+            <DialogTitle>{t.editCatalog}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="editCatalogName">Catalog Name</Label>
+              <Label htmlFor="editCatalogName">{t.catalogName}</Label>
               <Input
                 id="editCatalogName"
                 value={newCatalogName}
                 onChange={(e) => setNewCatalogName(e.target.value)}
-                placeholder="Enter catalog name"
+                placeholder={t.enterCatalogName}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="editCatalogDescription">Description</Label>
+              <Label htmlFor="editCatalogDescription">{t.description}</Label>
               <Textarea
                 id="editCatalogDescription"
                 value={newCatalogDescription}
                 onChange={(e) => setNewCatalogDescription(e.target.value)}
-                placeholder="Enter catalog description"
+                placeholder={t.enterCatalogDescription}
                 rows={3}
               />
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsEditCatalogOpen(false)}>
-              Cancel
+              {t.cancel}
             </Button>
             <Button onClick={handleUpdateCatalog} disabled={!newCatalogName.trim()}>
-              Update Catalog
+              {t.updateCatalog}
             </Button>
           </DialogFooter>
         </DialogContent>

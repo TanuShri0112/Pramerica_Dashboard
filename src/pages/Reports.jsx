@@ -7,6 +7,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import CustomReportDialog from '@/components/reports/CustomReportDialog';
 import AssessmentReportDetail from '@/components/reports/AssessmentReportDetail';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 const initialAssessmentReports = [
   {
@@ -126,6 +128,8 @@ const initialCategoryReports = {
 };
 
 const Reports = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [activeTab, setActiveTab] = useState('catalog');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedReport, setSelectedReport] = useState(null);
@@ -223,7 +227,7 @@ const Reports = () => {
   return (
     <div className="container mx-auto p-6 animate-fade-in max-w-7xl">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Reports</h1>
+        <h1 className="text-2xl font-bold">{t.reportsTitle}</h1>
       </div>
 
       {/* Search Bar */}
@@ -232,7 +236,7 @@ const Reports = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             type="text"
-            placeholder="Search reports..."
+            placeholder={t.searchReports}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -250,10 +254,10 @@ const Reports = () => {
           <div className="mb-6">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="bg-transparent border-b w-full flex justify-start rounded-none gap-1 h-auto p-0">
-                <TabsTrigger value="catalog" className="rounded-full py-2 px-6 data-[state=active]:bg-blue-500 data-[state=active]:text-white">Catalog</TabsTrigger>
-                <TabsTrigger value="myreports" className="rounded-full py-2 px-6 data-[state=active]:bg-blue-500 data-[state=active]:text-white">My reports</TabsTrigger>
-                <TabsTrigger value="history" className="rounded-full py-2 px-6 data-[state=active]:bg-blue-500 data-[state=active]:text-white">History</TabsTrigger>
-                <TabsTrigger value="scheduled" className="rounded-full py-2 px-6 data-[state=active]:bg-blue-500 data-[state=active]:text-white">Scheduled</TabsTrigger>
+                <TabsTrigger value="catalog" className="rounded-full py-2 px-6 data-[state=active]:bg-blue-500 data-[state=active]:text-white">{t.catalog}</TabsTrigger>
+                <TabsTrigger value="myreports" className="rounded-full py-2 px-6 data-[state=active]:bg-blue-500 data-[state=active]:text-white">{t.myReports}</TabsTrigger>
+                <TabsTrigger value="history" className="rounded-full py-2 px-6 data-[state=active]:bg-blue-500 data-[state=active]:text-white">{t.history}</TabsTrigger>
+                <TabsTrigger value="scheduled" className="rounded-full py-2 px-6 data-[state=active]:bg-blue-500 data-[state=active]:text-white">{t.scheduled}</TabsTrigger>
               </TabsList>
 
               <div className="mt-4">
@@ -267,7 +271,7 @@ const Reports = () => {
                           className="flex items-center text-blue-500"
                         >
                           <ChevronLeft className="h-4 w-4 mr-1" />
-                          Back to Catalog
+                          {t.backToCatalog}
                         </Button>
                       )}
                     </div>
@@ -276,7 +280,7 @@ const Reports = () => {
                       onClick={openCustomReportDialog}
                     >
                       <Plus className="h-4 w-4" />
-                      Custom report
+                      {t.customReport}
                     </Button>
                   </div>
 
@@ -297,7 +301,7 @@ const Reports = () => {
                           </div>
                           <div className="p-4">
                             <h3 className="text-lg font-semibold mb-2">{category.title}</h3>
-                            <p className="text-sm text-gray-500">{category.count} Reports</p>
+                            <p className="text-sm text-gray-500">{category.count} {t.reportsCount}</p>
                           </div>
                         </Card>
                       ))}
@@ -336,10 +340,10 @@ const Reports = () => {
                                         <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-2">
                                           <div className="flex items-center gap-2">
                                             <Checkbox id={`myreport-${report.id}`} />
-                                            <label htmlFor={`myreport-${report.id}`}>In My reports</label>
+                                            <label htmlFor={`myreport-${report.id}`}>{t.inMyReports}</label>
                                           </div>
-                                          <div>Library: {report.library}</div>
-                                          <div>Created: {report.date}</div>
+                                          <div>{t.library}: {report.library}</div>
+                                          <div>{t.created}: {report.date}</div>
                                         </div>
                                         <p className="text-gray-700">{report.description}</p>
                                       </div>
@@ -350,7 +354,7 @@ const Reports = () => {
                                           handleReportClick(report.id);
                                         }}
                                       >
-                                        Run
+                                        {t.run}
                                       </Button>
                                     </div>
                                   </div>
@@ -380,12 +384,12 @@ const Reports = () => {
                       onClick={openCustomReportDialog}
                     >
                       <Plus className="h-4 w-4" />
-                      Custom report
+                      {t.customReport}
                     </Button>
                   </div>
 
-                  <h2 className="text-xl font-semibold mb-2">My reports</h2>
-                  <p className="text-gray-500 mb-6">Click on a report to run it, or visit the catalog to browse other available reports.</p>
+                  <h2 className="text-xl font-semibold mb-2">{t.myReports}</h2>
+                  <p className="text-gray-500 mb-6">{language === 'en' ? 'Click on a report to run it, or visit the catalog to browse other available reports.' : 'Clique em um relatório para executá-lo ou visite o catálogo para navegar por outros relatórios disponíveis.'}</p>
 
                   <div className="space-y-6">
                     {filteredMyReports.map((report) => (
@@ -403,13 +407,13 @@ const Reports = () => {
 
                 <TabsContent value="history" className="mt-0">
                   <div className="text-center py-12">
-                    <p className="text-gray-500 text-lg">There is no history of run reports.</p>
+                    <p className="text-gray-500 text-lg">{t.noHistory}</p>
                   </div>
                 </TabsContent>
 
                 <TabsContent value="scheduled" className="mt-0">
                   <div className="text-center py-12">
-                    <p className="text-gray-500 text-lg">There are no scheduled reports.</p>
+                    <p className="text-gray-500 text-lg">{t.noScheduled}</p>
                   </div>
                 </TabsContent>
               </div>

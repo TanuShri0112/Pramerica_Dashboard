@@ -80,7 +80,7 @@ export const SidebarNav = ({ onCloseMobile }) => {
               </div>
               <div className="text-white">
                 <div>
-                  <h1 className="text-lg font-semibold">DepED Apayao</h1>
+                  <h1 className="text-lg font-semibold">MDCM</h1>
                   <p className="text-sm">Athena LMS</p>
                 </div>
               </div>

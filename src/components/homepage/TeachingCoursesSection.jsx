@@ -3,33 +3,64 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { Book, Calendar, Users, Copy } from "lucide-react";
+import { useLanguage } from '@/contexts/LanguageContext';
 
-const teachingCourses = [
-  {
-    id: 1,
-    title: "K-12 Curriculum: Grades 2 & 3",
-    image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
-    students: 45,
-    modules: 8
-  },
-  {
-    id: 2,
-    title: "K-12 Curriculum: Grade 5",
-    image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
-    students: 38,
-    modules: 7
-  },
-  {
-    id: 3,
-    title: "K-12 Curriculum: Grade 8",
-    image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
-    students: 42,
-    modules: 9
-  }
-];
+const getTeachingCourses = (language) => {
+  const courses = {
+    en: [
+      {
+        id: 1,
+        title: "Public Management System - Executive Branch",
+        image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
+        students: 45,
+        modules: 8
+      },
+      {
+        id: 2,
+        title: "Legislative Management Platform",
+        image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
+        students: 38,
+        modules: 7
+      },
+      {
+        id: 3,
+        title: "Database Management & Technical Support",
+        image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
+        students: 42,
+        modules: 9
+      }
+    ],
+    pt: [
+      {
+        id: 1,
+        title: "Sistema de Gestão Pública - Poder Executivo",
+        image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
+        students: 45,
+        modules: 8
+      },
+      {
+        id: 2,
+        title: "Plataforma de Gestão Legislativa",
+        image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
+        students: 38,
+        modules: 7
+      },
+      {
+        id: 3,
+        title: "Gestão de Banco de Dados e Suporte Técnico",
+        image: "https://aiiteducation.com/assets_web1/img/courses.jpg",
+        students: 42,
+        modules: 9
+      }
+    ]
+  };
+  return courses[language] || courses.en;
+};
 
 export default function TeachingCoursesSection() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const teachingCourses = getTeachingCourses(language);
 
   const handleCourseClick = (courseId) => {
     navigate(`/courses/view/${courseId}`);
@@ -39,9 +70,11 @@ export default function TeachingCoursesSection() {
     <section>
       <Card className="overflow-hidden border-blue-100 shadow-md hover:shadow-lg transition-all duration-300">
         <CardHeader className="bg-gradient-to-r from-blue-50 to-white flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-lg flex items-center gap-2 text-blue-800">Training Modules</CardTitle>
+          <CardTitle className="text-lg flex items-center gap-2 text-blue-800">
+            {language === 'en' ? 'Management Modules' : 'Módulos de Gestão'}
+          </CardTitle>
           <Badge variant="default" className="bg-blue-500 text-white rounded-full px-3 py-1 text-sm shadow-sm hover:bg-blue-600 transition-colors">
-            Active&nbsp;{teachingCourses.length}
+            {language === 'en' ? 'Active' : 'Ativo'}&nbsp;{teachingCourses.length}
           </Badge>
         </CardHeader>
         <CardContent className="p-4">

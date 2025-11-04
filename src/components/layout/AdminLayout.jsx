@@ -71,7 +71,7 @@ export const AdminLayout = ({ title = 'Dashboard' }) => {
       }
     }
 
-    document.title = `${newTitle} | DepED Apayao`;
+    document.title = `${newTitle} | Municipio De Conselheiro Mairinck`;
   }, [location.pathname, title, courseId, setCourseTitle]);
 
   return (

@@ -4,33 +4,64 @@ import { Button } from '@/components/ui/button';
 import { CalendarIcon } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
+
+const getEventsData = (language) => {
+  const eventsData = {
+    en: [
+      {
+        id: 1,
+        title: 'Executive Branch System Training',
+        time: '10:00 AM - 12:00 PM',
+        date: 'Today',
+        type: 'lecture',
+      },
+      {
+        id: 2,
+        title: 'Legislative Platform Workshop',
+        time: '12:00 PM - 1:00 PM',
+        date: 'Today',
+        type: 'meeting',
+      },
+      {
+        id: 3,
+        title: 'Database Conversion Review',
+        time: '2:00 PM - 4:00 PM',
+        date: 'Today',
+        type: 'office-hours',
+      },
+    ],
+    pt: [
+      {
+        id: 1,
+        title: 'Treinamento do Sistema do Poder Executivo',
+        time: '10:00 - 12:00',
+        date: 'Hoje',
+        type: 'lecture',
+      },
+      {
+        id: 2,
+        title: 'Workshop da Plataforma Legislativa',
+        time: '12:00 - 13:00',
+        date: 'Hoje',
+        type: 'meeting',
+      },
+      {
+        id: 3,
+        title: 'Revisão de Conversão de Banco de Dados',
+        time: '14:00 - 16:00',
+        date: 'Hoje',
+        type: 'office-hours',
+      },
+    ]
+  };
+  return eventsData[language] || eventsData.en;
+};
 
 export function CalendarSection() {
   const navigate = useNavigate();
-  
-  const events = [
-    {
-      id: 1,
-      title: 'K-12 Curriculum Training - Grade 2 & 3',
-      time: '10:00 AM - 12:00 PM',
-      date: 'Today',
-      type: 'lecture',
-    },
-    {
-      id: 2,
-      title: 'Lunch & Catering Services',
-      time: '12:00 PM - 1:00 PM',
-      date: 'Today',
-      type: 'meeting',
-    },
-    {
-      id: 3,
-      title: 'Grade 5 & 8 Implementation Workshop',
-      time: '2:00 PM - 4:00 PM',
-      date: 'Today',
-      type: 'office-hours',
-    },
-  ];
+  const { language } = useLanguage();
+  const events = getEventsData(language);
 
   const getEventTypeStyles = (type) => {
     switch (type) {
@@ -52,7 +83,9 @@ export function CalendarSection() {
   return (
     <Card className="shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200">
       <CardHeader className="flex flex-row items-center justify-between pb-3 pt-4 px-4 bg-slate-50 border-b border-gray-100">
-        <CardTitle className="text-lg font-semibold text-slate-700">Calendar</CardTitle>
+        <CardTitle className="text-lg font-semibold text-slate-700">
+          {language === 'en' ? 'Calendar' : 'Calendário'}
+        </CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-4">
         <ScrollArea className="h-[220px] pr-3">
@@ -78,7 +111,7 @@ export function CalendarSection() {
           ) : (
             <div className="flex flex-col items-center justify-center h-24 text-gray-500">
               <CalendarIcon className="h-8 w-8 mb-2 text-gray-400" />
-              <p className="text-sm">No upcoming events</p>
+              <p className="text-sm">{language === 'en' ? 'No upcoming events' : 'Sem eventos próximos'}</p>
             </div>
           )}
         </ScrollArea>
@@ -88,7 +121,7 @@ export function CalendarSection() {
           className="w-full mt-4 hover:bg-slate-50 transition-colors border-gray-200"
           onClick={handleViewCalendar}
         >
-          View Calendar
+          {language === 'en' ? 'View Calendar' : 'Ver Calendário'}
         </Button>
       </CardContent>
     </Card>

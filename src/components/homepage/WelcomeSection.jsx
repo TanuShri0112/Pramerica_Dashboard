@@ -4,9 +4,13 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 export function WelcomeSection() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = translations[language];
   const [api, setApi] = React.useState();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -14,34 +18,34 @@ export function WelcomeSection() {
   const slides = [
     {
       key: "welcome",
-      title: "Welcome to DepED Apayao Training Portal!",
-      subtitle: "School Leaders Training Program",
-      body: "Revised K to 12 Curriculum Phase 2 Implementation - Training for Grades 2, 3, 5 & 8. Access your training modules, schedules, and catering arrangements here.",
+      title: t.welcomeTitle,
+      subtitle: t.welcomeSubtitle,
+      body: t.welcomeBody,
       onClick: () => {},
     },
     {
       key: "training-schedule",
-      title: "Training Schedule & Venue",
+      title: t.trainingScheduleTitle,
       subtitle: "",
-      body: "View your complete training schedule, venue details, meal times, and accommodation arrangements. All logistics are managed through this portal.",
-      ctaLabel: "View Schedule",
+      body: t.trainingScheduleBody,
+      ctaLabel: t.viewSchedule,
       onClick: () => navigate("/profile"),
       // imgSrc: "/lovable-Uploads/6b1ea1e6-5943-4f76-b645-ae8ce5265dd0.png",
     },
     {
       key: "curriculum-materials",
-      title: "K-12 Curriculum Resources",
+      title: t.curriculumTitle,
       subtitle: "",
-      body: "Access all training materials, curriculum guides, and implementation resources for Grades 2, 3, 5 & 8. Download materials and track your progress.",
+      body: t.curriculumBody,
       onClick: () => {},
       // imgSrc: "/lovable-Uploads/fd0725b7-d679-48a4-8859-b656636e79ae.png",
     },
     {
       key: "need-help",
-      title: "Need Assistance?",
+      title: t.needHelpTitle,
       subtitle: "",
-      body: "Contact the training coordinators for support with curriculum implementation, venue concerns, or catering services. Our team is here to help you succeed.",
-      ctaLabel: "Contact Support",
+      body: t.needHelpBody,
+      ctaLabel: t.contactSupport,
       onClick: () => navigate("/help"),
       // imgSrc: "/lovable-Uploads/2250d96c-51d3-4326-8a80-ecad39a2f734.png",
     },

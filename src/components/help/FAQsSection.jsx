@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 export const FAQsSection = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [activeCategory, setActiveCategory] = useState('general');
   const [expandedItems, setExpandedItems] = useState({});
 
@@ -17,7 +21,7 @@ export const FAQsSection = () => {
   const faqCategories = [
     {
       id: 'general',
-      title: 'General Questions',
+      title: t.generalQuestions,
       icon: <HelpCircle className="h-5 w-5" />
     }
   ];
@@ -26,28 +30,28 @@ export const FAQsSection = () => {
     general: [
       {
         id: 'general-1',
-        question: 'How do I reset my password?',
-        answer: 'To reset your password, click on the "Forgot Password" link on the login page and follow the instructions sent to your email.'
+        question: t.howResetPassword,
+        answer: t.howResetPasswordAnswer
       },
       {
         id: 'general-2',
-        question: 'How do I update my profile information?',
-        answer: 'You can update your profile information by clicking on your profile picture in the top right corner and selecting "Edit Profile".'
+        question: t.howUpdateProfile,
+        answer: t.howUpdateProfileAnswer
       },
       {
         id: 'general-3',
-        question: 'What are the system requirements?',
-        answer: 'Our platform works best on the latest versions of Chrome, Firefox, Safari, and Edge. Make sure you have JavaScript enabled.'
+        question: t.systemRequirements,
+        answer: t.systemRequirementsAnswer
       },
       {
         id: 'general-4',
-        question: 'How do I contact support?',
-        answer: 'You can contact our support team through the Contact Support page or by emailing support@example.com'
+        question: t.howContactSupport,
+        answer: t.howContactSupportAnswer
       },
       {
         id: 'general-5',
-        question: 'Is there a mobile app available?',
-        answer: 'Yes, our mobile app is available for both iOS and Android devices. You can download it from the App Store or Google Play Store.'
+        question: t.mobileAppAvailable,
+        answer: t.mobileAppAnswer
       }
     ]
   };
@@ -55,9 +59,9 @@ export const FAQsSection = () => {
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold">Frequently Asked Questions</h2>
+        <h2 className="text-3xl font-bold">{t.frequentlyAskedQuestions}</h2>
         <p className="text-muted-foreground mt-2">
-          Find answers to common questions about our platform
+          {t.faqsDescription}
         </p>
       </div>
 

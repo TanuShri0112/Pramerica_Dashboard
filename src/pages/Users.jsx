@@ -30,26 +30,30 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 /**
  * @typedef {import('@/contexts/UserFilterContext').User} User
  * @typedef {import('@/contexts/UserFilterContext').UserRole} UserRole
  */
 
-/**
- * @type {Record<UserRole, string>}
- */
-const roleDisplayNames = {
-  all: 'All',
-  administrator: 'Administrators',
-  learner: 'Learners',
-  friends: 'Friends',
-  archived: 'Archived',
-  manager: 'Managers',
-  instructor: 'Instructors',
-};
-
 const UsersPage = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  
+  /**
+   * @type {Record<UserRole, string>}
+   */
+  const roleDisplayNames = {
+    all: t.all,
+    administrator: t.administrators,
+    learner: t.learners,
+    friends: language === 'en' ? 'Friends' : 'Amigos',
+    archived: t.archived,
+    manager: t.manager,
+    instructor: t.instructors,
+  };
   const { 
     filteredUsers, 
     selectedRole, 
@@ -240,43 +244,43 @@ const UsersPage = () => {
 
   const getColumns = () => {
     const baseColumns = [
-      { key: 'name', label: 'Name' },
-      { key: 'lastVisited', label: 'Last visited' }
+      { key: 'name', label: t.name },
+      { key: 'lastVisited', label: t.lastVisited }
     ];
     
     switch (selectedRole) {
       case 'learner':
         return [
           ...baseColumns.slice(0, 1),
-          { key: 'courses', label: 'Courses' },
-          { key: 'completed', label: 'Completed' },
-          { key: 'deactivated', label: 'Deactivated' },
-          { key: 'groups', label: 'Groups' },
-          { key: 'awards', label: 'Awards' },
+          { key: 'courses', label: t.courses },
+          { key: 'completed', label: t.completed },
+          { key: 'deactivated', label: t.deactivated },
+          { key: 'groups', label: t.groups },
+          { key: 'awards', label: t.awards },
           baseColumns[1]
         ];
       case 'instructor':
         return [
           ...baseColumns.slice(0, 1),
-          { key: 'courses', label: 'Courses' },
-          { key: 'archived', label: 'Archived' },
-          { key: 'groups', label: 'Groups' },
+          { key: 'courses', label: t.courses },
+          { key: 'archived', label: t.archived },
+          { key: 'groups', label: t.groups },
           baseColumns[1]
         ];
       case 'administrator':
         return [
           ...baseColumns.slice(0, 1),
-          { key: 'superAdmin', label: 'Super admin' },
-          { key: 'contactMessages', label: 'Contact messages' },
-          { key: 'groups', label: 'Groups' },
+          { key: 'superAdmin', label: t.superAdmin },
+          { key: 'contactMessages', label: t.contactMessages },
+          { key: 'groups', label: t.groups },
           baseColumns[1]
         ];
       default:
         return [
           ...baseColumns.slice(0, 1),
-          { key: 'learner', label: 'Learner' },
-          { key: 'instructor', label: 'Instructor' },
-          { key: 'administrator', label: 'Administrator' },
+          { key: 'learner', label: t.learners },
+          { key: 'instructor', label: language === 'en' ? 'Instructor' : 'Instrutor' },
+          { key: 'administrator', label: language === 'en' ? 'Administrator' : 'Administrador' },
           baseColumns[1]
         ];
     }
@@ -284,27 +288,27 @@ const UsersPage = () => {
 
   const getActionButtons = () => {
     const baseActions = [
-      { label: 'Message', icon: <Mail className="h-4 w-4 mr-2" /> },
-      { label: 'Edit', icon: <Pencil className="h-4 w-4 mr-2" /> },
-      { label: 'Remove', icon: <Trash className="h-4 w-4 mr-2" /> }
+      { label: t.message, icon: <Mail className="h-4 w-4 mr-2" /> },
+      { label: t.edit, icon: <Pencil className="h-4 w-4 mr-2" /> },
+      { label: t.remove, icon: <Trash className="h-4 w-4 mr-2" /> }
     ];
     
     switch (selectedRole) {
       case 'learner':
         return [
-          { label: 'Message', icon: <Mail className="h-4 w-4 mr-2" /> },
-          { label: 'Scores', icon: <ArrowUpDown className="h-4 w-4 mr-2" /> },
-          { label: 'Passwords', icon: <Lock className="h-4 w-4 mr-2" /> },
-          { label: 'Resend login', icon: <RotateCcw className="h-4 w-4 mr-2" /> },
-          { label: 'Award', icon: <Check className="h-4 w-4 mr-2" /> },
-          { label: 'Edit', icon: <Pencil className="h-4 w-4 mr-2" /> },
-          { label: 'Remove', icon: <Trash className="h-4 w-4 mr-2" /> },
-          { label: 'Archive', icon: <Filter className="h-4 w-4 mr-2" /> }
+          { label: t.message, icon: <Mail className="h-4 w-4 mr-2" /> },
+          { label: t.scores, icon: <ArrowUpDown className="h-4 w-4 mr-2" /> },
+          { label: t.passwords, icon: <Lock className="h-4 w-4 mr-2" /> },
+          { label: t.resendLogin, icon: <RotateCcw className="h-4 w-4 mr-2" /> },
+          { label: t.award, icon: <Check className="h-4 w-4 mr-2" /> },
+          { label: t.edit, icon: <Pencil className="h-4 w-4 mr-2" /> },
+          { label: t.remove, icon: <Trash className="h-4 w-4 mr-2" /> },
+          { label: t.archive, icon: <Filter className="h-4 w-4 mr-2" /> }
         ];
       case 'instructor':
       case 'administrator':
         return [
-          { label: 'Message', icon: <Mail className="h-4 w-4 mr-2" /> }
+          { label: t.message, icon: <Mail className="h-4 w-4 mr-2" /> }
         ];
       default:
         return baseActions;
@@ -337,9 +341,9 @@ const UsersPage = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <PageHeader 
-        title="Users" 
+        title={t.usersTitle} 
         action={{
-          label: "Add User",
+          label: t.addUser,
           onClick: () => setDialogOpen(true)
         }}
       />
@@ -357,7 +361,7 @@ const UsersPage = () => {
                 value="all"
                 className="data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded-full px-4 py-2 border border-gray-200 hover:border-blue-300 transition-colors"
               >
-                All <span className="ml-2 px-2 py-0.5 bg-gray-100 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 text-xs rounded-full">
+                {t.all} <span className="ml-2 px-2 py-0.5 bg-gray-100 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 text-xs rounded-full">
                   {userCounts.all}
                 </span>
               </TabsTrigger>
@@ -366,7 +370,7 @@ const UsersPage = () => {
                 value="learner"
                 className="data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded-full px-4 py-2 border border-gray-200 hover:border-blue-300 transition-colors"
               >
-                Learners <span className="ml-2 px-2 py-0.5 bg-gray-100 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 text-xs rounded-full">
+                {t.learners} <span className="ml-2 px-2 py-0.5 bg-gray-100 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 text-xs rounded-full">
                   {userCounts.learner}
                 </span>
               </TabsTrigger>
@@ -375,7 +379,7 @@ const UsersPage = () => {
                 value="instructor"
                 className="data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded-full px-4 py-2 border border-gray-200 hover:border-blue-300 transition-colors"
               >
-                Instructors <span className="ml-2 px-2 py-0.5 bg-gray-100 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 text-xs rounded-full">
+                {t.instructors} <span className="ml-2 px-2 py-0.5 bg-gray-100 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 text-xs rounded-full">
                   {userCounts.instructor}
                 </span>
               </TabsTrigger>
@@ -384,7 +388,7 @@ const UsersPage = () => {
                 value="administrator"
                 className="data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded-full px-4 py-2 border border-gray-200 hover:border-blue-300 transition-colors"
               >
-                Administrators <span className="ml-2 px-2 py-0.5 bg-gray-100 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 text-xs rounded-full">
+                {t.administrators} <span className="ml-2 px-2 py-0.5 bg-gray-100 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 text-xs rounded-full">
                   {userCounts.administrator}
                 </span>
               </TabsTrigger>
@@ -399,7 +403,7 @@ const UsersPage = () => {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input 
               className="pl-9 bg-white border-gray-200" 
-              placeholder="Search users..." 
+              placeholder={t.searchUsers} 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -452,7 +456,7 @@ const UsersPage = () => {
                     </div>
                   </th>
                 ))}
-                <th className="p-4 text-sm font-medium text-gray-600">Actions</th>
+                <th className="p-4 text-sm font-medium text-gray-600">{t.actions}</th>
               </tr>
             </thead>
             <tbody>
@@ -617,16 +621,16 @@ const UsersPage = () => {
       <AlertDialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete User</AlertDialogTitle>
+            <AlertDialogTitle>{t.deleteUser}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete <strong>{userToDelete?.name}</strong>? 
-              This action cannot be undone and will permanently remove the user from the system.
+              {t.deleteUserConfirm} <strong>{userToDelete?.name}</strong>? 
+              {t.deleteUserDesc}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t.cancel}</AlertDialogCancel>
             <AlertDialogAction onClick={confirmDeleteUser} className="bg-red-600 hover:bg-red-700">
-              Delete User
+              {t.deleteUserButton}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -636,16 +640,16 @@ const UsersPage = () => {
       <AlertDialog open={removeConfirmOpen} onOpenChange={setRemoveConfirmOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove Users</AlertDialogTitle>
+            <AlertDialogTitle>{t.removeUsers}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to remove {selectedUsers.length} selected user{selectedUsers.length > 1 ? 's' : ''}? 
-              This action cannot be undone.
+              {t.removeUsersConfirm} {selectedUsers.length} {language === 'en' ? 'selected user' : 'usuário'}{selectedUsers.length > 1 ? (language === 'en' ? 's' : 's selecionados') : (language === 'en' ? '' : ' selecionado')}? 
+              {t.removeUsersDesc}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t.cancel}</AlertDialogCancel>
             <AlertDialogAction onClick={handleRemoveUsers} className="bg-red-600 hover:bg-red-700">
-              Remove Users
+              {t.removeUsers}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -7,6 +7,8 @@ import AddModuleDialog from './AddModuleDialog';
 import ModuleCard from './ModuleCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import EditModuleDialog from './EditModuleDialog';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 
 const CourseModules = () => {
   console.log('Rendering CourseModules');
@@ -14,6 +16,8 @@ const CourseModules = () => {
   const { courseId } = useParams();
   const [searchParams] = useSearchParams();
   const courseType = searchParams.get('type') || 'open';
+  const { language } = useLanguage();
+  const t = translations[language];
   
   const [modules, setModules] = useState([]);
   const [isAddModuleDialogOpen, setIsAddModuleDialogOpen] = useState(false);
@@ -34,16 +38,27 @@ const CourseModules = () => {
         setIsPublishedCourse(true);
         
         if (publishedCourse.modules && publishedCourse.modules.length > 0) {
+          const enTranslations = translations.en;
+          const ptTranslations = translations.pt;
           const imageMap = {
-            'Module 1: K-12 Curriculum Overview for Grades 2 & 3': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 2: Grade 2 & 3 Teaching Methodologies': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 3: Assessment & Learning Outcomes': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 1: Grade 5 Curriculum Foundations': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 2: Subject Integration & Cross-curricular Learning': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 3: Grade 5 Performance Standards': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 1: Grade 8 K-12 Curriculum Framework': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 2: Advanced Teaching Strategies for Grade 8': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 3: Grade 8 Learner Assessment System': 'https://aiiteducation.com/assets_web1/img/courses.jpg'
+            // English titles
+            'Module 1: Executive Branch System Overview': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 2: Administrative Operations Management': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 3: Executive Reporting & Analytics': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            // Portuguese titles
+            [enTranslations.module1Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            [enTranslations.module2Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            [enTranslations.module3Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            [ptTranslations.module1Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            [ptTranslations.module2Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            [ptTranslations.module3Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            // Other modules
+            'Module 1: Legislative Platform Introduction': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 2: Council Management & Workflow': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 3: Legislative Document Management': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 1: Database Architecture & Planning': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 2: Data Migration & Conversion Services': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 3: Technical Support & Maintenance': 'https://aiiteducation.com/assets_web1/img/courses.jpg'
           };
           const courseModules = publishedCourse.modules.map((module, index) => ({
             id: module.id,
@@ -65,11 +80,11 @@ const CourseModules = () => {
         // Course-specific modules based on courseId
         const getCourseModules = (courseId) => {
           const courseModules = {
-            '1': [ // K-12 Grades 2 & 3 Training
+            '1': [ // Public Management System - Executive Branch
               {
                 id: 1,
-                title: "Module 1: K-12 Curriculum Overview for Grades 2 & 3",
-                description: "Introduction to revised K-12 curriculum framework and learning standards",
+                title: t.module1Title,
+                description: t.module1Description,
                 units: 6,
                 assessments: 1,
                 duration: "3 hours",
@@ -78,8 +93,8 @@ const CourseModules = () => {
               },
               {
                 id: 2,
-                title: "Module 2: Grade 2 & 3 Teaching Methodologies",
-                description: "Effective instructional strategies and classroom management techniques",
+                title: t.module2Title,
+                description: t.module2Description,
                 units: 8,
                 assessments: 2,
                 duration: "4 hours",
@@ -88,8 +103,8 @@ const CourseModules = () => {
               },
               {
                 id: 3,
-                title: "Module 3: Assessment & Learning Outcomes",
-                description: "Implementing assessment frameworks and measuring student progress",
+                title: t.module3Title,
+                description: t.module3Description,
                 units: 7,
                 assessments: 2,
                 duration: "3.5 hours",
@@ -97,11 +112,11 @@ const CourseModules = () => {
                 locked: courseType === 'sequential',
               }
             ],
-            '2': [ // Grade 5 Training
+            '2': [ // Legislative Management Platform
               {
                 id: 1,
-                title: "Module 1: Grade 5 Curriculum Foundations",
-                description: "Core competencies and learning standards for intermediate level",
+                title: "Module 1: Legislative Platform Introduction",
+                description: "Understanding legislative management system and council operations",
                 units: 7,
                 assessments: 2,
                 duration: "3.5 hours",
@@ -110,8 +125,8 @@ const CourseModules = () => {
               },
               {
                 id: 2,
-                title: "Module 2: Subject Integration & Cross-curricular Learning",
-                description: "Integrated teaching approaches for Grade 5 subjects",
+                title: "Module 2: Council Management & Workflow",
+                description: "Managing legislative sessions, voting processes, and documentation",
                 units: 9,
                 assessments: 3,
                 duration: "5 hours",
@@ -120,8 +135,8 @@ const CourseModules = () => {
               },
               {
                 id: 3,
-                title: "Module 3: Grade 5 Performance Standards",
-                description: "Evaluating student performance and continuous improvement strategies",
+                title: "Module 3: Legislative Document Management",
+                description: "Creating, tracking, and archiving legislative documents and resolutions",
                 units: 6,
                 assessments: 2,
                 duration: "4 hours",
@@ -129,11 +144,11 @@ const CourseModules = () => {
                 locked: courseType === 'sequential',
               }
             ],
-            '3': [ // Grade 8 Training
+            '3': [ // Database Management & Technical Support
               {
                 id: 1,
-                title: "Module 1: Grade 8 K-12 Curriculum Framework",
-                description: "Junior high school curriculum structure and learning competencies",
+                title: "Module 1: Database Architecture & Planning",
+                description: "Understanding database structure and planning migration strategies",
                 units: 8,
                 assessments: 2,
                 duration: "4 hours",
@@ -142,8 +157,8 @@ const CourseModules = () => {
               },
               {
                 id: 2,
-                title: "Module 2: Advanced Teaching Strategies for Grade 8",
-                description: "Student-centered learning and 21st-century skills integration",
+                title: "Module 2: Data Migration & Conversion Services",
+                description: "Executing database conversion and ensuring data integrity",
                 units: 9,
                 assessments: 3,
                 duration: "5 hours",
@@ -152,8 +167,8 @@ const CourseModules = () => {
               },
               {
                 id: 3,
-                title: "Module 3: Grade 8 Learner Assessment System",
-                description: "Comprehensive assessment tools and performance evaluation",
+                title: "Module 3: Technical Support & Maintenance",
+                description: "System maintenance, user training, and data center hosting services",
                 units: 7,
                 assessments: 2,
                 duration: "4.5 hours",
@@ -163,20 +178,31 @@ const CourseModules = () => {
             ]
           };
           
-          return courseModules[courseId] || courseModules['1']; // Default to Grades 2 & 3
+          return courseModules[courseId] || courseModules['1']; // Default to Public Management
         };
         
         const defaultModules = getCourseModules(courseId).map((m) => {
+          const enTranslations = translations.en;
+          const ptTranslations = translations.pt;
           const titleToImage = {
-            'Module 1: K-12 Curriculum Overview for Grades 2 & 3': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 2: Grade 2 & 3 Teaching Methodologies': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 3: Assessment & Learning Outcomes': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 1: Grade 5 Curriculum Foundations': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 2: Subject Integration & Cross-curricular Learning': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 3: Grade 5 Performance Standards': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 1: Grade 8 K-12 Curriculum Framework': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 2: Advanced Teaching Strategies for Grade 8': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
-            'Module 3: Grade 8 Learner Assessment System': 'https://aiiteducation.com/assets_web1/img/courses.jpg'
+            // English titles
+            'Module 1: Executive Branch System Overview': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 2: Administrative Operations Management': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 3: Executive Reporting & Analytics': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            // Portuguese titles
+            [enTranslations.module1Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            [enTranslations.module2Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            [enTranslations.module3Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            [ptTranslations.module1Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            [ptTranslations.module2Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            [ptTranslations.module3Title]: 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            // Other modules
+            'Module 1: Legislative Platform Introduction': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 2: Council Management & Workflow': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 3: Legislative Document Management': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 1: Database Architecture & Planning': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 2: Data Migration & Conversion Services': 'https://aiiteducation.com/assets_web1/img/courses.jpg',
+            'Module 3: Technical Support & Maintenance': 'https://aiiteducation.com/assets_web1/img/courses.jpg'
           };
           return { ...m, image: titleToImage[m.title] };
         });
@@ -187,7 +213,7 @@ const CourseModules = () => {
     };
 
     loadModulesData();
-  }, [courseId, courseType]);
+  }, [courseId, courseType, language]);
 
   useEffect(() => {
     if (isPublishedCourse) {
@@ -239,57 +265,59 @@ const CourseModules = () => {
     setIsEditDialogOpen(true);
   }, []);
 
-  if (loading) {
-    return (
-      <div className="p-6 animate-fade-in">
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-          <span className="ml-2">Loading modules...</span>
-        </div>
-      </div>
-    );
-  }
+   if (loading) {
+     return (
+       <div className="p-6 animate-fade-in">
+         <div className="flex items-center justify-center h-64">
+           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+           <span className="ml-2">{language === 'en' ? 'Loading modules...' : 'Carregando módulos...'}</span>
+         </div>
+       </div>
+     );
+   }
 
   if (isPublishedCourse && modules.length === 0) {
     return (
       <div className="p-6 animate-fade-in">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center gap-4">
-            <Button 
-              onClick={() => navigate('/courses')} 
-              variant="outline"
-              className="flex items-center gap-2"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Courses
-            </Button>
-            <div>
-              <h1 className="text-2xl font-bold">Course Modules</h1>
-              <p className="text-gray-600">No modules found for this course</p>
-            </div>
-          </div>
-          <Button onClick={handleAddModule} className="bg-ca-primary hover:bg-ca-secondary">
-            <Plus className="h-4 w-4 mr-2" />
-            Add Module
-          </Button>
+           <Button 
+             onClick={() => navigate('/courses')} 
+             variant="outline"
+             className="flex items-center gap-2"
+           >
+             <ArrowLeft className="h-4 w-4" />
+             {t.backToCourses}
+           </Button>
+           <div>
+             <h1 className="text-2xl font-bold">{t.courseModules}</h1>
+             <p className="text-gray-600">{language === 'en' ? 'No modules found for this course' : 'Nenhum módulo encontrado para este curso'}</p>
+           </div>
+         </div>
+         <Button onClick={handleAddModule} className="bg-ca-primary hover:bg-ca-secondary">
+           <Plus className="h-4 w-4 mr-2" />
+           {t.addModule}
+         </Button>
         </div>
 
         <Card className="max-w-md mx-auto mt-8">
-          <CardHeader className="text-center">
-            <div className="mx-auto mb-4 bg-gray-100 rounded-full p-6 w-20 h-20 flex items-center justify-center">
-              <BookOpen className="h-8 w-8 text-gray-400" />
-            </div>
-            <CardTitle className="text-xl">No Modules Found</CardTitle>
-          </CardHeader>
-          <CardContent className="text-center">
-            <p className="text-gray-600 mb-6">
-              This course doesn't have any modules yet. Create your first module to get started.
-            </p>
-            <Button onClick={handleAddModule} className="w-full bg-ca-primary hover:bg-ca-secondary">
-              <Plus className="h-4 w-4 mr-2" />
-              Create First Module
-            </Button>
-          </CardContent>
+           <CardHeader className="text-center">
+             <div className="mx-auto mb-4 bg-gray-100 rounded-full p-6 w-20 h-20 flex items-center justify-center">
+               <BookOpen className="h-8 w-8 text-gray-400" />
+             </div>
+             <CardTitle className="text-xl">{language === 'en' ? 'No Modules Found' : 'Nenhum Módulo Encontrado'}</CardTitle>
+           </CardHeader>
+           <CardContent className="text-center">
+             <p className="text-gray-600 mb-6">
+               {language === 'en' 
+                 ? "This course doesn't have any modules yet. Create your first module to get started."
+                 : "Este curso ainda não possui módulos. Crie seu primeiro módulo para começar."}
+             </p>
+             <Button onClick={handleAddModule} className="w-full bg-ca-primary hover:bg-ca-secondary">
+               <Plus className="h-4 w-4 mr-2" />
+               {language === 'en' ? 'Create First Module' : 'Criar Primeiro Módulo'}
+             </Button>
+           </CardContent>
         </Card>
 
         <AddModuleDialog
@@ -302,32 +330,32 @@ const CourseModules = () => {
   }
 
   return (
-    <div className="p-6 animate-fade-in">
-      <div className="flex justify-between items-center mb-6">
-        <div className="flex items-center gap-4">
-          <Button 
-            onClick={() => navigate('/courses')} 
-            variant="outline"
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Courses
-          </Button>
-          <div>
-            <h1 className="text-2xl font-bold">Course Modules</h1>
-            <p className="text-gray-600">
-              {courseType === 'sequential' 
-                ? 'Complete modules in order to unlock the next one' 
-                : 'Access modules in any order'}
-              {isPublishedCourse && ' • Published Course'}
-            </p>
-          </div>
-        </div>
-        <Button onClick={handleAddModule} className="bg-ca-primary hover:bg-ca-secondary">
-          <Plus className="h-4 w-4 mr-2" />
-          Add Module
-        </Button>
-      </div>
+     <div className="p-6 animate-fade-in">
+       <div className="flex justify-between items-center mb-6">
+         <div className="flex items-center gap-4">
+           <Button 
+             onClick={() => navigate('/courses')} 
+             variant="outline"
+             className="flex items-center gap-2"
+           >
+             <ArrowLeft className="h-4 w-4" />
+             {t.backToCourses}
+           </Button>
+           <div>
+             <h1 className="text-2xl font-bold">{t.courseModules}</h1>
+             <p className="text-gray-600">
+               {courseType === 'sequential' 
+                 ? t.completeModulesInOrder
+                 : t.accessModulesAnyOrder}
+               {isPublishedCourse && ` • ${t.publishedCourse}`}
+             </p>
+           </div>
+         </div>
+         <Button onClick={handleAddModule} className="bg-ca-primary hover:bg-ca-secondary">
+           <Plus className="h-4 w-4 mr-2" />
+           {t.addModule}
+         </Button>
+       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {modules.map((module) => (

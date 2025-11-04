@@ -8,6 +8,8 @@ import {
   X, GraduationCap
 } from 'lucide-react';
 import { useCourseSidebar } from '@/contexts/CourseSidebarContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/locales/translations';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useToast } from '@/hooks/use-toast';
@@ -19,6 +21,8 @@ export const CourseContextualSidebar = ({ isCollapsed }) => {
   const navigate = useNavigate();
   const { closeCourseSidebar, courseTitle } = useCourseSidebar();
   const { toast } = useToast();
+  const { language } = useLanguage();
+  const t = translations[language];
 
   if (!courseId) return null;
 
@@ -41,11 +45,11 @@ export const CourseContextualSidebar = ({ isCollapsed }) => {
   };
   
   const courseNavItems = [
-    { icon: LayoutGrid, label: "Modules", path: `/courses/view/${courseId}/modules` },
-    { icon: BarChart2, label: "Scores", path: `/courses/view/${courseId}/scores` },
-    { icon: Users, label: "Learners", path: `/courses/view/${courseId}/learners` },
-    { icon: GraduationCap, label: "Instructors", path: `/courses/view/${courseId}/instructors` },
-    { icon: Clock, label: "Attendance", path: `/courses/view/${courseId}/attendance` },
+    { icon: LayoutGrid, label: t.modules, path: `/courses/view/${courseId}/modules` },
+    { icon: BarChart2, label: t.scores, path: `/courses/view/${courseId}/scores` },
+    { icon: Users, label: t.learners, path: `/courses/view/${courseId}/learners` },
+    { icon: GraduationCap, label: t.instructors, path: `/courses/view/${courseId}/instructors` },
+    { icon: Clock, label: t.attendance, path: `/courses/view/${courseId}/attendance` },
   ];
 
   const renderTooltip = (content, children) => {
@@ -83,9 +87,11 @@ export const CourseContextualSidebar = ({ isCollapsed }) => {
             </div>
             <div className="text-white">
               <h2 className="font-semibold text-sm truncate max-w-[130px]">
-                {courseTitle || 'Course Menu'}
+                {courseTitle || t.courseMenu}
               </h2>
-              <p className="text-xs text-slate-300">Learning Management</p>
+              <p className="text-xs text-slate-300">
+                {t.learningManagement}
+              </p>
             </div>
           </div>
         )}
@@ -123,10 +129,10 @@ export const CourseContextualSidebar = ({ isCollapsed }) => {
       
       {/* Admin section */}
       <div className="border-t border-gray-100 p-3">
-        {renderTooltip("Course Administration", 
+        {renderTooltip(t.administration, 
           <NavItem
             icon={Settings}
-            label="Administration"
+            label={t.administration}
             to={`/courses/view/${courseId}/admin`}
             active={location.pathname === `/courses/view/${courseId}/admin` || 
                    location.pathname.startsWith(`/courses/view/${courseId}/admin/`)}

@@ -4,33 +4,64 @@ import { Button } from '@/components/ui/button';
 import { Bell } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
+
+const getAnnouncementsData = (language) => {
+  const announcementsData = {
+    en: [
+      {
+        id: 1,
+        title: 'System Update: Legislative Module Enhancement',
+        source: 'IT Department',
+        time: '2 hours ago',
+        content: 'The Legislative Management Platform will receive new features next Monday. Database conversion and technical support services will be available during the transition.',
+      },
+      {
+        id: 2,
+        title: 'Data Center Migration Completed',
+        source: 'Infrastructure Team',
+        time: '1 day ago',
+        content: 'All municipal data has been successfully migrated to the new data center. Hosting services are now fully operational with enhanced security protocols.',
+      },
+      {
+        id: 3,
+        title: 'User Training Sessions - Executive Branch',
+        source: 'Training Coordinator',
+        time: '3 days ago',
+        content: 'Mandatory training sessions for Executive Branch staff on the Public Management System modules. Please confirm your attendance by end of week.',
+      },
+    ],
+    pt: [
+      {
+        id: 1,
+        title: 'Atualização do Sistema: Melhoria do Módulo Legislativo',
+        source: 'Departamento de TI',
+        time: 'há 2 horas',
+        content: 'A Plataforma de Gestão Legislativa receberá novos recursos na próxima segunda-feira. Serviços de conversão de banco de dados e suporte técnico estarão disponíveis durante a transição.',
+      },
+      {
+        id: 2,
+        title: 'Migração do Data Center Concluída',
+        source: 'Equipe de Infraestrutura',
+        time: 'há 1 dia',
+        content: 'Todos os dados municipais foram migrados com sucesso para o novo data center. Os serviços de hospedagem agora estão totalmente operacionais com protocolos de segurança aprimorados.',
+      },
+      {
+        id: 3,
+        title: 'Sessões de Treinamento de Usuários - Poder Executivo',
+        source: 'Coordenador de Treinamento',
+        time: 'há 3 dias',
+        content: 'Sessões de treinamento obrigatórias para funcionários do Poder Executivo sobre os módulos do Sistema de Gestão Pública. Confirme sua presença até o final da semana.',
+      },
+    ]
+  };
+  return announcementsData[language] || announcementsData.en;
+};
 
 export function AnnouncementSection() {
   const navigate = useNavigate();
-  
-  const announcements = [
-    {
-      id: 1,
-      title: 'Training Venue & Schedule Confirmation',
-      source: 'Training Coordinator',
-      time: '2 hours ago',
-      content: 'K-12 Curriculum training for School Leaders starts next Monday. Venue details and meal schedules have been finalized. Check your email for complete information.',
-    },
-    {
-      id: 2,
-      title: 'Accommodation & Catering Services',
-      source: 'Logistics Team',
-      time: '1 day ago',
-      content: 'All meals (breakfast, lunch, dinner) and snacks will be provided during the training. Accommodation arrangements have been confirmed for out-of-town participants.',
-    },
-    {
-      id: 3,
-      title: 'Grade 2, 3, 5 & 8 Curriculum Materials',
-      source: 'Training Manager',
-      time: '3 days ago',
-      content: 'Revised K to 12 Curriculum Phase 2 Implementation materials are now available for download. Please review materials before the training session.',
-    },
-  ];
+  const { language } = useLanguage();
+  const announcements = getAnnouncementsData(language);
 
   const handleViewAllAnnouncements = () => {
     navigate('/announcements');
@@ -39,7 +70,9 @@ export function AnnouncementSection() {
   return (
     <Card className="shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200">
       <CardHeader className="flex flex-row items-center justify-between pb-3 pt-4 px-4 bg-slate-50 border-b border-gray-100">
-        <CardTitle className="text-lg font-semibold text-slate-700">Announcements</CardTitle>
+        <CardTitle className="text-lg font-semibold text-slate-700">
+          {language === 'en' ? 'Announcements' : 'Anúncios'}
+        </CardTitle>
         <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-full hover:bg-slate-200 transition-colors">
           <Bell className="h-4 w-4" />
           <span className="sr-only">Notification settings</span>
@@ -65,7 +98,7 @@ export function AnnouncementSection() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center h-24 text-gray-500">
-              <p className="text-sm">No announcements</p>
+              <p className="text-sm">{language === 'en' ? 'No announcements' : 'Sem anúncios'}</p>
             </div>
           )}
         </ScrollArea>
@@ -75,7 +108,7 @@ export function AnnouncementSection() {
           className="w-full mt-4 hover:bg-slate-50 transition-colors border-gray-200"
           onClick={handleViewAllAnnouncements}
         >
-          View All Announcements
+          {language === 'en' ? 'View All Announcements' : 'Ver Todos os Anúncios'}
         </Button>
       </CardContent>
     </Card>
