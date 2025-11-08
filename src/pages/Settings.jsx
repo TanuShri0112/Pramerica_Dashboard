@@ -25,7 +25,7 @@ const Settings = () => {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="siteName">Platform Name</Label>
-              <Input id="siteName" defaultValue="BAPCO" />
+              <Input id="siteName" defaultValue="DVA" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="siteUrl">Platform URL</Label>
@@ -50,7 +50,7 @@ const Settings = () => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="emailFooter">Email Footer Text</Label>
-              <Input id="emailFooter" defaultValue="© 2025 BAPCO. All rights reserved." />
+              <Input id="emailFooter" defaultValue="© 2025 DVA. All rights reserved." />
             </div>
             <Button>Update Email Settings</Button>
           </CardContent>
