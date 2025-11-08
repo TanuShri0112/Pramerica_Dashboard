@@ -7,44 +7,55 @@ import { motion } from "framer-motion";
 const groups = [
   {
     id: 1,
-    name: "Sales Agents",
-    desc: "Insurance sales training group",
-    img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
+    name: "General Engineering Guild",
+    desc: "Weekly design reviews and field rotations",
+    img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=40&q=80",
   },
   {
     id: 2,
-    name: "Training Managers",
-    desc: "Sales training coordination group",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=40&q=80",
+    name: "Program Manager Forum",
+    desc: "Acquisition leadership roundtable",
+    img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=40&q=80",
   },
   {
     id: 3,
-    name: "New Agents",
-    desc: "Insurance license prep group",
-    img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=40&q=80",
+    name: "Business Operations Collective",
+    desc: "Policy modernization & analytics huddles",
+    img: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=40&q=80",
+  },
+  {
+    id: 4,
+    name: "Contracting Knowledge Net",
+    desc: "FAR updates & negotiation practice",
+    img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=40&q=80",
   },
 ];
 
 const catalog = [
   {
     id: 1,
-    name: "Insurance Fundamentals",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=40&q=80",
+    name: "General Engineering Foundations",
+    img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=40&q=80",
   },
   {
     id: 2,
-    name: "Life Insurance Sales",
-    img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
+    name: "Computer Engineering Cyber Lab",
+    img: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=40&q=80",
   },
   {
     id: 3,
-    name: "Sales Training",
-    img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=40&q=80",
+    name: "Contract Specialist Toolkit",
+    img: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=40&q=80",
   },
   {
     id: 4,
-    name: "Insurance Compliance",
-    img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=40&q=80",
+    name: "Program Manager Playbook",
+    img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=40&q=80",
+  },
+  {
+    id: 5,
+    name: "Business & Industry Analytics",
+    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=40&q=80",
   },
 ];
 
@@ -72,7 +83,7 @@ export default function WidgetsSection() {
             <CardHeader className="pb-2 flex flex-row items-center justify-between bg-gradient-to-r from-blue-50 to-white">
               <CardTitle className="flex items-center gap-2 text-base text-blue-800">
                 <Folder className="text-blue-500" />
-                Catalog overview
+                Track resource library
                 <span className="ml-1 bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full text-xs font-semibold">
                   {catalog.length}
                 </span>
@@ -110,7 +121,7 @@ export default function WidgetsSection() {
             <CardHeader className="pb-2 flex flex-row items-center justify-between bg-gradient-to-r from-blue-50 to-white">
               <CardTitle className="flex items-center gap-2 text-base text-blue-800">
                 <Users className="text-blue-500" />
-                Groups
+                Communities
                 <span className="ml-1 bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full text-xs font-semibold">
                   {groups.length}
                 </span>

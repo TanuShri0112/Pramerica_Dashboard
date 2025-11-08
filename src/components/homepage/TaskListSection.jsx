@@ -10,29 +10,36 @@ export function TaskListSection() {
   const [tasks, setTasks] = useState([
     {
       id: 1,
-      title: 'Complete Insurance Sales Assignment',
-      dueDate: '2023-07-10',
+      title: 'Upload General Engineering field rotation summary',
+      dueDate: '2025-11-12',
       completed: false,
       priority: 'high'
     },
     {
       id: 2,
-      title: 'Review Life Insurance Documentation',
-      dueDate: '2023-07-12',
+      title: 'Finalize secure coding checklist for Computer Engineering sprint',
+      dueDate: '2025-11-14',
       completed: false,
       priority: 'medium'
     },
     {
       id: 3,
-      title: 'Submit Sales Proposal',
-      dueDate: '2023-07-15',
+      title: 'Submit Contract Specialist negotiation reflection',
+      dueDate: '2025-11-10',
       completed: true,
       priority: 'high'
     },
     {
       id: 4,
-      title: 'Watch Lecture on Sales Techniques',
-      dueDate: '2023-07-08',
+      title: 'Review Program Manager risk register updates',
+      dueDate: '2025-11-09',
+      completed: false,
+      priority: 'high'
+    },
+    {
+      id: 5,
+      title: 'Share Business & Industry process improvement notes',
+      dueDate: '2025-11-16',
       completed: false,
       priority: 'low'
     }

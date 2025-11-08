@@ -11,35 +11,53 @@ export function CalendarSection() {
   const events = [
     {
       id: 1,
-      title: 'Insurance Sales Training',
-      time: '10:00 AM - 12:00 PM',
+      title: 'General Engineering Design Review',
+      time: '9:30 AM - 11:00 AM',
       date: 'Today',
-      type: 'lecture',
+      type: 'workshop',
     },
     {
       id: 2,
-      title: 'Sales Technique Review',
-      time: '2:00 PM - 3:00 PM',
+      title: 'Computer Engineering Secure Coding Stand-up',
+      time: '1:00 PM - 1:45 PM',
       date: 'Today',
-      type: 'meeting',
+      type: 'standup',
     },
     {
       id: 3,
-      title: 'Insurance License Prep',
-      time: '2:00 PM - 4:00 PM',
-      date: 'Today',
-      type: 'office-hours',
+      title: 'Contract Specialist Negotiation Lab',
+      time: '3:00 PM - 4:15 PM',
+      date: 'Tomorrow',
+      type: 'simulation',
+    },
+    {
+      id: 4,
+      title: 'Program Manager Risk Sync',
+      time: '10:30 AM - 11:30 AM',
+      date: 'Thu, Nov 13',
+      type: 'meeting',
+    },
+    {
+      id: 5,
+      title: 'Business & Industry Analytics Briefing',
+      time: '2:00 PM - 3:00 PM',
+      date: 'Fri, Nov 14',
+      type: 'briefing',
     },
   ];
 
   const getEventTypeStyles = (type) => {
     switch (type) {
-      case 'lecture':
+      case 'workshop':
         return 'bg-blue-50 text-blue-700 border-blue-200';
+      case 'standup':
+        return 'bg-indigo-50 text-indigo-700 border-indigo-200';
+      case 'simulation':
+        return 'bg-green-50 text-green-700 border-green-200';
       case 'meeting':
         return 'bg-purple-50 text-purple-700 border-purple-200';
-      case 'office-hours':
-        return 'bg-green-50 text-green-700 border-green-200';
+      case 'briefing':
+        return 'bg-amber-50 text-amber-700 border-amber-200';
       default:
         return 'bg-gray-50 text-gray-700 border-gray-200';
     }
