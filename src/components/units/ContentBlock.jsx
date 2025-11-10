@@ -492,7 +492,7 @@ export const ContentBlock = ({
 
   const renderChart = () => {
     const { chartType, title, data } = block.content;
-    const colors = ['#3b82f6', '#1d4ed8', '#1e40af', '#2563eb', '#60a5fa', '#93c5fd'];
+    const colors = ['#3b82f6', '#1d4ed8', '#1e40af', '#065f46', '#60a5fa', '#93c5fd'];
 
     if (!data || data.length === 0) {
       return (

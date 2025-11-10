@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import TextReader from '@/components/accessibility/TextReader';
 
 const ZoomClassesSection = () => {
   const [classes, setClasses] = useState([
@@ -95,6 +96,51 @@ const ZoomClassesSection = () => {
   const upcomingClasses = classes.filter(cls => !cls.isCompleted);
   const completedClasses = classes.filter(cls => cls.isCompleted);
 
+  const readableText = useMemo(() => {
+    const parts = ['Zoom Classes Management'];
+
+    if (upcomingClasses.length > 0) {
+      parts.push('Upcoming Classes');
+      upcomingClasses.forEach((cls) => {
+        parts.push(
+          [
+            cls.title,
+            cls.date ? `${cls.date} at ${cls.time}` : '',
+            cls.duration ? `Duration ${cls.duration}` : '',
+            cls.description || '',
+          ]
+            .filter(Boolean)
+            .join('. ')
+        );
+      });
+    } else {
+      parts.push('No upcoming classes scheduled.');
+    }
+
+    if (completedClasses.length > 0) {
+      parts.push('Completed Classes');
+      completedClasses.forEach((cls) => {
+        parts.push(
+          [
+            cls.title,
+            cls.date ? `Held ${cls.date} at ${cls.time}` : '',
+            cls.duration ? `Duration ${cls.duration}` : '',
+            typeof cls.attendance === 'number' && typeof cls.totalStudents === 'number'
+              ? `Attendance ${cls.attendance} out of ${cls.totalStudents}`
+              : '',
+            cls.description || '',
+          ]
+            .filter(Boolean)
+            .join('. ')
+        );
+      });
+    } else {
+      parts.push('No completed classes yet.');
+    }
+
+    return parts.join(' ');
+  }, [upcomingClasses, completedClasses]);
+
   const handleScheduleClass = () => {
     if (!newClass.title || !newClass.date || !newClass.time) {
       toast.error('Please fill in all required fields');
@@ -175,15 +221,18 @@ const ZoomClassesSection = () => {
 
   return (
     <section className="mb-6">
-      <Card className="overflow-hidden border-purple-100 shadow-md hover:shadow-lg transition-all duration-300">
-        <CardHeader className="bg-gradient-to-r from-purple-50 to-white flex flex-row items-center justify-between pb-4">
-          <CardTitle className="text-xl flex items-center gap-2 text-purple-800">
-            <Video className="h-6 w-6" />
-            Zoom Classes Management
-          </CardTitle>
+      <Card className="overflow-hidden border-green-100 shadow-md hover:shadow-lg transition-all duration-300">
+        <CardHeader className="bg-gradient-to-r from-emerald-50 to-white flex flex-row items-center justify-between pb-4">
+          <div className="flex items-center gap-3">
+            <CardTitle className="text-xl flex items-center gap-2 text-emerald-800">
+              <Video className="h-6 w-6" />
+              Zoom Classes Management
+            </CardTitle>
+            <TextReader text={readableText} />
+          </div>
           <Dialog open={isScheduleDialogOpen} onOpenChange={setIsScheduleDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-blue-600 hover:bg-blue-700">
+              <Button className="bg-emerald-600 hover:bg-emerald-700">
                 <Plus className="h-4 w-4 mr-2" />
                 Schedule New Class
               </Button>
@@ -259,10 +308,10 @@ const ZoomClassesSection = () => {
                   />
                 </div>
                 <div className="flex gap-2 pt-4">
-                  <Button onClick={handleScheduleClass} className="flex-1">
+                  <Button onClick={handleScheduleClass} className="flex-1 bg-emerald-600 hover:bg-emerald-700">
                     Schedule Class
                   </Button>
-                  <Button variant="outline" onClick={() => setIsScheduleDialogOpen(false)}>
+                  <Button variant="outline" onClick={() => setIsScheduleDialogOpen(false)} className="border-emerald-200 text-emerald-700 hover:bg-emerald-50">
                     Cancel
                   </Button>
                 </div>
@@ -324,7 +373,7 @@ const ZoomClassesSection = () => {
                             <Button
                               size="sm"
                               onClick={() => handleJoinZoom(cls.zoomLink, cls.title)}
-                              className="bg-blue-600 hover:bg-blue-700"
+                              className="bg-emerald-600 hover:bg-emerald-700"
                             >
                               <ExternalLink className="h-4 w-4 mr-1" />
                               Join via Zoom
@@ -389,6 +438,7 @@ const ZoomClassesSection = () => {
                             size="sm"
                             variant="outline"
                             onClick={() => handleViewRecording(cls)}
+                            className="border-emerald-200 text-emerald-700 hover:bg-emerald-50"
                           >
                             <Eye className="h-4 w-4 mr-1" />
                             View Recording
@@ -397,6 +447,7 @@ const ZoomClassesSection = () => {
                             size="sm"
                             variant="outline"
                             onClick={() => handleDownloadRecording(cls)}
+                            className="border-emerald-200 text-emerald-700 hover:bg-emerald-50"
                           >
                             <Download className="h-4 w-4 mr-1" />
                             Download
@@ -468,10 +519,10 @@ const ZoomClassesSection = () => {
                 />
               </div>
               <div className="flex gap-2 pt-4">
-                <Button onClick={handleEditClass} className="flex-1">
+                <Button onClick={handleEditClass} className="flex-1 bg-emerald-600 hover:bg-emerald-700">
                   Update Class
                 </Button>
-                <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+                <Button variant="outline" onClick={() => setIsEditDialogOpen(false)} className="border-emerald-200 text-emerald-700 hover:bg-emerald-50">
                   Cancel
                 </Button>
               </div>
@@ -508,7 +559,7 @@ const ZoomClassesSection = () => {
                   <h3 className="font-semibold">{selectedRecording.title}</h3>
                   <p className="text-sm text-gray-600">{selectedRecording.description}</p>
                 </div>
-                <Button onClick={() => handleDownloadRecording(selectedRecording)}>
+                <Button onClick={() => handleDownloadRecording(selectedRecording)} className="bg-emerald-600 hover:bg-emerald-700">
                   <Download className="h-4 w-4 mr-2" />
                   Download Recording
                 </Button>

@@ -64,14 +64,27 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					muted: 'hsl(var(--sidebar-muted))',
 				},
+				blue: {
+					50: '#ecfdf5',
+					100: '#d1fae5',
+					200: '#a7f3d0',
+					300: '#6ee7b7',
+					400: '#34d399',
+					500: '#10b981',
+					600: '#059669',
+					700: '#047857',
+					800: '#065f46',
+					900: '#064e3b',
+					950: '#022c22',
+				},
 				// Custom colors for BAPCO
 				ca: {
-					primary: '#33C3F0',   // Update to match the blue buttons in the screenshots
-					secondary: '#1EAEDB',
-					tertiary: '#0FA0CE',
+					primary: '#10b981',
+					secondary: '#059669',
+					tertiary: '#047857',
 					dark: '#1A202C',
-					light: '#EBF8FF',
-					gray: '#F7FAFC',
+					light: '#ecfdf5',
+					gray: '#f0fdf4',
 				},
 				status: {
 					active: '#34c759',     // Green
@@ -80,12 +93,12 @@ export default {
 				},
 				// Calendar specific colors
 				calendar: {
-					today: '#33C3F0',
+					today: '#10b981',
 					event: {
-						default: '#33C3F0',
+						default: '#10b981',
 						red: '#ea384c',
 						green: '#34c759',
-						blue: '#33C3F0', 
+						blue: '#10b981', 
 						purple: '#9b87f5',
 					},
 					grid: '#f1f0fb',
@@ -104,9 +117,9 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			boxShadow: {
-				'glow': '0 0 15px rgba(51, 195, 240, 0.3)',
-				'glow-sm': '0 0 5px rgba(51, 195, 240, 0.2)',
-				'glow-lg': '0 0 25px rgba(51, 195, 240, 0.4)',
+				'glow': '0 0 15px rgba(16, 185, 129, 0.3)',
+				'glow-sm': '0 0 5px rgba(16, 185, 129, 0.2)',
+				'glow-lg': '0 0 25px rgba(16, 185, 129, 0.4)',
 			},
 			keyframes: {
 				'accordion-down': {
