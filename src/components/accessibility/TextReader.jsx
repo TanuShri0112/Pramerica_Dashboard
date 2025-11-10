@@ -20,6 +20,7 @@ const TextReader = ({ text, label = 'Read content aloud', className = '' }) => {
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
+      <span className="text-sm font-medium text-emerald-700">Listen</span>
       <Button
         type="button"
         variant="outline"
